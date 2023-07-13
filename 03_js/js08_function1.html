@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>      
+        // 매개변수 X, 리턴값 X
+        function fun(){
+            console.log("fun");
+        }
+        fun(); // fun
+
+        // 매개변수 O, 리턴값 X
+        function fun2(n, n2){
+            console.log("fun2", n, n2);
+        }
+        fun2(); // fun2 undefined undefined
+
+        fun2(10, "hello"); // fun2 10 hello
+        fun2(10, "hello", 20, 30); // fun2 10 hello
+
+        // 매개변수 X, 리턴값 O
+        function fun3(){
+            console.log("fun3");
+            return 100;
+        }
+        var result = fun3();
+        console.log(result); // 100
+
+        // 매개변수 O, 리턴값 O
+        function fun4(n, m){
+            console.log("fun4", n, m);
+            return n+m;
+        }
+        var result = fun4(10, 20);
+        console.log(result); // 30
+    </script>
+</head>
+<body>
+    <p>안녕하세요.</p>
+</body>
+</html>

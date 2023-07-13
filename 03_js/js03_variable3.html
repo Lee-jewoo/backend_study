@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 스코프(scope)
+        if(true){
+            var n = 10;
+            let n2 = 20;
+            console.log(n);
+            console.log(n2);
+        }
+        console.log(n);
+        // console.log(n2); error
+
+        function fun(){
+            var x = 100;
+            let y = 200;
+            console.log(x);
+            console.log(y);
+        }
+        fun();
+        // console.log(x); error
+        // console.log(y); error
+
+        var a = 10;
+        var a = 20;
+
+        let b = 10;
+        // let b = 20; error
+        </script>
+</head>
+<body>
+    <p>안녕하세요.</p>
+</body>
+</html>

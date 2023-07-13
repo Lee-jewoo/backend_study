@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function fun() {
+            console.log("fun");
+            console.dir(event);
+            event.preventDefault(); // 자동 submit 방지
+        }
+        function xx(){
+            console.log("xx");
+        }
+        function yy(){
+            console.log("yy");
+            event.stopPropagation(); // 이벤트 전파 방지
+        }
+    </script>
+</head>
+<body>
+    <h2>자동 submit 방지</h2>
+    <form action="target.html" method="get" onsubmit="fun()">
+        나이 : <input type="text" name="age"><br>
+        <input type="submit" value="전송">
+    </form>
+
+    <h2>이벤트 전파 방지</h2>
+    <div style="background-color: aquamarine;" onclick="xx()">
+        xxx
+        <div style="background-color: brown;" onclick="yy()">
+            yyy
+        </div>
+    </div>
+</body>
+</html>

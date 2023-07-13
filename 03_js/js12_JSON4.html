@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // 문자열 -> JSON
+        var str = "[1, 2, 3]";
+        var json = JSON.parse(str);
+        console.log(typeof str, typeof json);
+        console.log(json[0], json[1]);
+        
+        // JSON -> 문자열
+        var json = [4, 5, 6];
+        var str = JSON.stringify(json);
+        console.log(typeof json, typeof str);
+    </script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        console.log(location.href); // http://127.0.0.1:5500/03_js/js07.object6_BOM4_locationl.html
+        console.log(location.protocol); // http:
+        console.log(location.pathname); // /03_js/js07.object6_BOM4_locationl.html
+        console.log(location.host); // 127.0.0.1:5500
+        console.log(location.port); // 5500
+
+        function req(){ // -> 함수를 사용해 url을 변경
+            location.href="http://www.google.com";
+        }
+        function req2(){ // -> 새로고침
+            location.reload();
+        }
+    </script>
+</head>
+<body>
+    <p>안녕하세요.</p>
+    <button onclick="req()">구글</button>
+    <button onclick="req2()">새로고침</button>
+</body>
+</html>

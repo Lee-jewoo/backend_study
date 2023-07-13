@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function copy(){
+            var check = document.querySelector("#check");
+            console.dir(check);
+            if (check.checked) {
+                document.querySelector("#address_copy").value = document.querySelector("#address").value
+            } else {
+                document.querySelector("#address_copy").value = "";
+            }
+        }
+    </script>
+</head>
+<body>
+    주소 : <input type="text" value="서울특별시" id="address"><br>
+    배송지 주소와 동일하면 체크하시오.
+    <input type="checkbox" onclick="copy()" id="check">
+    <hr>
+    배송지 주소 : <input type="text" id="address_copy">
+</body>
+</html>

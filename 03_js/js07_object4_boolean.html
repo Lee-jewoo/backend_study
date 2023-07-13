@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var x = new Boolean(0);
+        var x = new Boolean("");
+        var x = new Boolean(undefined);
+        var x = new Boolean(null);
+        var x = new Boolean(NaN);
+        console.log(x); // Boolean {false}
+        console.log(x.toString()); // false (문자열)
+        console.log(x.valueOf()); // false (객체)
+
+        if (x.toString()) { // x.toString()은 문자열이기 때문에 true
+            console.log("참"); // 참
+        }
+        if (x.valueOf()) { // x.valueOf()는 false
+            console.log("참"); // 거짓
+        } else {
+            console.log("거짓")
+        }
+    </script>
+</head>
+<body>
+    <p>안녕하세요.</p>
+</body>
+</html>

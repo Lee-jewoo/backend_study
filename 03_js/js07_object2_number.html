@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        console.log(Number.MAX_VALUE); // Number 객체의 최대값
+        console.log(Number.MIN_VALUE); // Number 객체의 최소값
+        var n = new Number(10);
+        var n = 10;
+
+        // 숫자를 문자열로 변환
+        console.log(n.toString(), typeof n.toString); // 10 string
+        console.log(n.toString(2), n.toString(8), n.toString(16)); // 2진수 1010, 8진수 12, 16진수 a
+
+        // 소수점 반올림
+        var m = 3.141592;
+        console.log(m.toFixed()); // 3 -> 정수 부분만
+        console.log(m.toFixed(3)); // 3.142 -> 해당 소수점 자리까지 반올림
+
+        // 문자열을 숫자로
+        console.log(Number.parseFloat("3.14") + 10); // 문자열을 실수로
+        console.log(Number.parseInt("10") + 10); // 문자열을 정수로
+
+        // 정수, NaN이 맞는지
+        console.log(Number.isInteger(3.14), Number.isNaN(NaN)) // false true
+    </script>
+</head>
+<body>
+    <p>안녕하세요.</p>
+</body>
+</html>

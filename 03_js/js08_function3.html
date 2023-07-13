@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function fun(){
+            console.log("함수 선언식 : fun");
+        }
+        fun();
+        console.log(fun); // 함수 이름만 사용
+        
+        var fun = function (){
+            console.log("함수 표현식 : fun")
+        };
+        fun();
+        console.log(fun); // 함수 이름만 사용
+
+        var fun2 = function fun2(n, m){
+            console.log("함수 표현식 : fun2", n, m)
+        };
+        fun2(1, 2); // fun2 1 2
+
+        var fun3 = function fun3(n, m){
+            console.log("함수 표현식 : fun3")
+            return n+m;
+        };
+        var result = fun3(1, 2);
+        console.log(result); // 3
+    </script>
+</head>
+<body>
+    <p>안녕하세요.</p>
+</body>
+</html>

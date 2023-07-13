@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var d = new Date();
+        console.log(d); // Tue Jul 04 2023 13:20:23 GMT+0900 (한국 표준시)
+        console.log(d.getFullYear()); // 연
+        console.log(d.getMonth()+1); // 월 (0~11 범위이기 때문에 +1)
+        console.log(d.getDate()); // 일
+        console.log(d.getHours()); // 시
+        console.log(d.getMinutes()); // 분
+        console.log(d.getSeconds()); // 초
+        
+        // 날짜 변경        
+        var d2 = new Date();
+        //Sun Aug 01 1993 13:32:21 GMT+0900 (한국 표준시)
+        d2.setFullYear(1993);
+        d2.setMonth(7); // 월은 0~11
+        d2.setDate(1);
+        console.log(d2);
+    </script>
+</head>
+<body>
+    <p>안녕하세요.</p>
+</body>
+</html>

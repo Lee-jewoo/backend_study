@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function init(){
+            var p = document.querySelector("p");
+            console.dir(p);
+            console.log(p.innerText); // Hello
+            console.log(p.innerHTML); // <span>Hello</span>
+            p.innerText = "world"
+            p.innerHTML = "<h1>world</h1>"
+        }
+    </script>
+</head>
+<body onload="init()">
+    <p><span>Hello</span></p>
+</body>
+</html>

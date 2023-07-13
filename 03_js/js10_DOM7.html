@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function change(){
+            var origin = document.querySelector("#origin");
+            console.dir(origin)
+            origin.src = "images/pineapple.jpg"
+            origin.width = "200"
+            origin.height = "200"
+        }
+    </script>
+</head>
+<body>
+    <img src="images/001.png" width="100" height="100" id="origin">
+    <button onclick="change()">이미지 변경</button>
+</body>
+</html>

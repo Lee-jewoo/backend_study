@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        // default 매개변수 -> undefined 방지
+        function fun(n=1, m=2){
+            console.log("fun", n, m);
+        }
+        fun(); // fun2 1 2
+        fun(20); // fun2 20 2
+        fun(10, "hello"); // fun2 10 hello
+
+        // 가변인자 -> 매개변수와 대응되지 않는 인자값은 배열로 저장됨
+        function fun2(n, m, ...k){
+            console.log("fun2", n, m, k);
+        }
+        fun2(1, 2, 3); // fun2 1 2 [3]
+        fun2(1, 2, 3, 4, 5, 6); // fun2 1 2 [3, 4, 5, 6]
+
+        // default 매개변수와 가변인자 혼용
+        function fun3(n, m=0, ...k){
+            console.log("fun3", n, m ,k)
+        }
+        fun3(1); // fun3 1 0 []
+        fun3(1, 2, 3); // fun3 1 2 [3]
+        fun3(1, 2, 3, 4, 5) // fun3 1 2 [3, 4, 5]
+    </script>
+</head>
+<body>
+    <p>안녕하세요.</p>
+</body>
+</html>

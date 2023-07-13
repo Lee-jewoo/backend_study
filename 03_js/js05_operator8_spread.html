@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var n = [1, 2, 3];
+
+        var n2 = [...n]; // 배열 복사
+        console.log(n.toString(), n2.toString()); // 1,2,3 1,2,3
+
+        var n3 = [4, 5, 6];
+        var m = [...n, ...n3]; // 배열 연결
+        console.log(m.toString()); // 1,2,3,4,5,6
+        
+        var m2 = [...n, 7, 8, 9]; // 배열에 요소 추가
+        console.log(m2.toString()); // 1,2,3,7,8,9
+    </script>
+</head>
+<body>
+    <p>안녕하세요.</p>
+</body>
+</html>

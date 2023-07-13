@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var arr = [10, 20, 30];
+        console.log(arr);
+
+        arr[0] = 100; // 데이터 변경
+        console.log(arr.toString()); // 100, 20, 30
+        
+        arr.push(40, 50); // 데이터 추가 (마지막에)
+        console.log(arr.toString()); // 100, 20, 30, 40, 50
+
+        arr.pop(); // 데이터 삭제 (마지막 값)
+        console.log(arr.toString()); // 100, 20, 30, 40
+
+        arr.splice(1, 2, 200, 300); // 특정 위치에 데이터 삽입, 삭제
+        console.log(arr.toString()); // 100, 200, 300, 40
+    </script>
+</head>
+<body>
+    <p>안녕하세요.</p>
+</body>
+</html>

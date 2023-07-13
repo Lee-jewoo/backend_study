@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var arr = [6, 2, 8, 5, 1, 7, 9];
+        console.log(arr.toString());
+        
+        arr.reverse(); // 뒤집기
+        console.log(arr.toString()); // 9, 7, 1, 5, 8, 2, 6
+
+        var arr2 = arr.slice(1, 5); // 배열 부분 자르기
+        console.log(arr2.toString()); // 7, 1, 5, 8
+
+        console.log(arr.indexOf(9)); // 특정 값의 위치(index)
+    
+        arr.sort(); // 오름차순 정렬
+        console.log(arr.toString()); // 1, 2, 5, 6, 7, 8, 9
+        var arr = [16, 23, 81, 52, 12, 8, 29];
+
+        arr.sort(); // -> 10의 자리 수만 비교해 오름차순 정렬
+        console.log(arr.toString()); // 12,16,23,29,52,8,81
+
+        arr.sort(function(a, b){return a-b}); // -> 함수를 이용해 두 자리 수도 오름차순 정렬
+        console.log(arr.toString()); // 8,12,16,23,29,52,81
+
+        arr.sort(function(a, b){return b-a}); // -> 내림차순 정렬
+        console.log(arr.toString()); // 81,52,29,23,16,12,8
+
+        var arr = ["세종대왕", "이순신", "유관순", "이황", "이이"];
+        var s = arr.join("*"); // 배열을 문자열로 변환
+        console.log(s); // 세종대왕*이순신*유관순*이황*이이
+        arr.fill("제우쓰", 0, 2); // 배열의 데이터를 다른 값으로 바꾸기
+        console.log(arr.toString()); // 제우쓰,제우쓰,유관순,이황,이이
+    </script>
+</head>
+<body>
+    <p>안녕하세요.</p>
+</body>
+</html>

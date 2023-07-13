@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        function fun() {
+            console.log(fun);
+        }
+    </script>
+</head>
+<body>
+    <button onclick="fun()">ok</button><br>
+    <input type="text" onkeyup="fun();" onfocus="fun()"><br>
+    <select id="cars" name="cars" onchange="fun()">
+        <option value="volvo">Volvo</option>
+        <option value="hyundai">Saab</option>
+        <option value="kia">Fiat</option>
+        <option value="audi">Audi</option>
+    </select><br>
+    <input type="checkbox" name="fruit" value="사과" onclick="fun()">사과
+    <input type="checkbox" name="fruit" value="바나나">바나나
+    <input type="checkbox" name="fruit" value="메론">메론<br>
+    <img src="images/001.png" width="100" height="100" onmouseover="fun()" onmouseout="fun()">
+</body>
+</html>

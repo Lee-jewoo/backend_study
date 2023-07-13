@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var username = "춘식이";
+        var userage = 10;
+        const person = {
+            username,
+            userage,
+            
+            getusername(){return this.username},
+            getuserage(){return this.userage},
+
+            setusername(name){this.username = name},
+            setuserage(age){this.userage = age}
+        };
+        console.log(person.username, person.userage);
+        person.setusername("라이언");
+        person.setuserage(15);
+        console.log(person.getusername(), person.getuserage());
+    </script>
+</head>
+<body>
+</body>
+</html>
