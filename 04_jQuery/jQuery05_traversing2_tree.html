@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+          // children
+          $("div").children("span").css("color", "red")
+          // find
+          $("div").find("span").css("color", "blue")
+          // parent
+          $("p").parent().attr("id", "xxx")
+          // parents
+          $("p").parents().attr("id", "yyy")
+        });
+    </script>
+</head>
+<body>
+  <div>
+		<span>this is 1st p</span>
+	</div>
+	<div>
+	 <p> 
+		<span>this is 2nd p</span>
+	  </p>	
+	</div>
+	<div class="myClass">
+		<span>this is 3rd p</span>
+	</div>
+  </body>
+</html>

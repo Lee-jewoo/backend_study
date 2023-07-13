@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+          $("li").eq(1).css("color", "red");
+          $("p").filter(".middle").css("color", "blue");
+          $("p").not(".middle").css("color", "yellow");
+          var is = $("p").filter("[class]").is(".middle");
+          console.log(is); // true
+
+          $("li").has("span").css("color", "green");
+          $("li").first().css("color", "violet");
+          $("li").last().css("font-size", "30px");
+          $("li").slice(0, [ 3]).css("font-size", "50px");
+          
+           // js 객체로 사용
+          var result = $("li").map(function(idx, ele){
+            console.log(idx, ele, ele.innerText);
+            return ele.innerText.toUpperCase();
+          });
+          console.log(result);
+
+           // jQuery 객체로 사용 -> undefined
+          var result = $("li").map(function(idx, ele){
+            console.log($(ele), $(ele).text());
+            return $(ele).text().toUpperCase();
+          });
+          console.log(result);
+
+          // this
+          var result = $("li").map(function(idx, ele){
+            console.log(ele, this); // this = ele에 전달된 요소
+            console.log($(ele), $(this)); // this = ele에 전달된 요소 / js 객체
+            console.log($(ele).text(), $(this).text()); // jQuery 객체
+          });
+          console.log(result);
+        });
+    </script>
+</head>
+<body>
+  <p>text</p>
+  <p class="middle">Middle <span>text</span></p>
+  <p class="final">final text</p>
+  <div>
+      <ul>
+        <li>list item 1</li>
+        <li>list item 2</li>
+        <li><span>list item 3</span></li>
+        <li>list item 4</li>
+      </ul>
+  </div>
+  </body>
+</html>

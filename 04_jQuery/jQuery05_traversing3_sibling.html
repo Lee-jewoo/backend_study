@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+          // next : 바로 뒤 형제
+          $("li").next().css("color", "red");
+          $("li").next(".selected").css("font-size", "40px");
+          // nextAll : 뒤 형제들
+          $("li:first").nextAll().css("color", "blue");
+          $("li:first").nextAll(".selected").css("font-size", "40px");
+          // prev : 바로 앞 형제
+          $("li").prev().css("color", "yellow");
+          $("li").prev(".selected").css("font-size", "40px");
+          // prev : 앞 형제들
+          $("li:last").prevAll().css("color", "green");
+          $("li:last").prevAll(".selected").css("font-size", "40px");
+          // siblings : 모든 형제들
+          $("li.xxx").siblings().css("color", "violet");
+        });
+    </script>
+</head>
+<body>
+  <ul>
+    <li>A</li>
+    <li class="selected">B</li>
+    <li>C</li>
+    <li class="xxx">D</li>
+    <li>E</li>
+  </ul>
+</body>
+</html>

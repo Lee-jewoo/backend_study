@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+      $("document").ready(function(){
+        $("#get").on("click", function(){
+          var txt = $("p").text(); // <p>의 text
+          var htm = $("p").html(); // <p>의 태그 포함
+          var v = $("#addr1").val(); // input 값
+          var at = $("a").attr("href"); // 속성값
+          console.log(txt, htm, v, at);
+        });
+
+        $("#set").on("click", function(){
+          $("P").text("happy"); // <p>의 text 설정
+          $("P").html("<h1>happy</h1>"); // <p>의 태그포함 설정
+          var addr1 = $("#addr1").val();
+          $("#addr2").val(addr1); // 사용자 입력 주소 복사
+          $("a").attr("href", "http://www.naver.com"); // href 링크 설정
+          $("a").removeAttr("href"); // 속성 삭제
+        });
+      })
+    </script>
+</head>
+<body>
+  <button id="get">출력</button>
+  <button id="set">설정</button>
+  <hr>
+  <p>Hello <em>world</em>!!!</p>
+  주소:<input type="text" name="userid" id="addr1"><br>
+  배송주소<input type="text" name="passwd" id="addr2"><br>
+  <a href="http://www.google.com">link</a>
+  <div id="result"></div>
+</body>
+</html>

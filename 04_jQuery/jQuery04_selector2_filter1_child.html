@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            // :first-child
+            $("li:first-child").css("color", "red")
+            // :last-child
+            $("li:last-child").css("color", "blue")
+            // :nth-child
+            $("li:nth-child(3)").css("color", "yellow")
+            $("li:nth-child(2n)").css("color", "green")
+            // :only-child
+            $("td:only-child").css("color", "tomato")
+        });
+    </script>
+</head>
+<body>
+    <input type="text" value="one">
+    <input type="text" value="two">
+    <input type="text" value="three">
+    <ul>
+        <li>a</li>
+        <li>b</li>
+        <li>c</li>
+        <li>d</li>
+        <li>e</li>
+        <li>f</li>
+    </ul>
+    <table border="1">
+                <tr>
+                    <td>#1</td>
+                    <td>#2</td>
+                    <td>#3</td>
+                    <td>#4</td>
+                    <td>#5</td>
+                </tr>
+                <tr>
+                    <td>#6</td>
+                    <td>#7</td>
+                    <td>#8</td>
+                    <td>#9</td>
+                    <td>#10</td>
+                </tr>
+                <tr>
+                    <td colspan="5" align="center">#11</td>
+                </tr>
+    </table>
+</body>
+</html>
