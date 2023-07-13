@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+  function size(){
+    var option = document.querySelectorAll("option");
+    var result = document.querySelector("#result");
+    var i = 0;
+    if (option[i].selected){
+      result.style = "font-size :" + option[i].innerText;
+    }
+  }
+</script>
+</head>
+<body>
+ 글꼴크기:
+ <select onchange="size()">
+  <option>16px</option>
+  <option>32px</option>
+  <option>40px</option>
+  <option>56px</option>
+ </select>
+ <div id="result">
+   안녕하세요.
+ </div>
+</body>
+</html>

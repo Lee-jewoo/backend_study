@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function login(){
+   var userid = document.querySelector("#userid");
+   var passwd = document.querySelector("#passwd");
+   var idSpan = document.querySelector("#idSpan")
+   var pwSpan = document.querySelector("#pwSpan")
+   if (userid.value == ""){
+      idSpan.innerText = "아이디값을 입력하시오"
+      event.preventDefault();
+      }
+   if (passwd.value == ""){
+      pwSpan.innerText = "비밀번호를 입력하시오"
+      event.preventDefault();
+      }
+}
+</script>
+</head>
+<body>
+<form action="success.html">
+ 아이디<input type="text" name="userid" id="userid">
+ <span id="idSpan"></span><br>
+ 비밀번호<input type="text" name="passwd" id="passwd">
+ <span id="pwSpan"></span><br>
+  <input type="submit" value="로그인" onclick="login()">
+ </form>
+</body>
+</html>

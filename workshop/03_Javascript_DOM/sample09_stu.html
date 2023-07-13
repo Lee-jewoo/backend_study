@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function check(){
+    var all = document.querySelectorAll("[onclick]");
+    var lang = document.querySelectorAll(".lang");
+    if (all[0].checked) {
+        lang[0].checked = true;
+        lang[1].checked = true;
+        lang[2].checked = true;
+    }
+    if (!all[0].checked) {
+        lang[0].checked = false;
+        lang[1].checked = false;
+        lang[2].checked = false;
+    }
+}
+</script>
+</head>
+<body>
+전체선택
+<input type="checkbox" name="all" onclick="check()"><br>
+<input type="checkbox" name="java" class="lang">java<br>
+<input type="checkbox" name="sql" class="lang">sql<br>
+<input type="checkbox" name="angular" class="lang">angular<br>
+</body>
+</html>

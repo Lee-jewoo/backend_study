@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function img_name1(){
+    var image = document.querySelectorAll("img");
+    var result = document.querySelector("#result");
+    result.innerText = "a.jpg";
+}
+function img_name2(){
+    var image = document.querySelectorAll("img");
+    var result = document.querySelector("#result");
+    result.innerText = "b.jpg";
+}
+function img_name3(){
+    var image = document.querySelectorAll("img");
+    var result = document.querySelector("#result");
+    result.innerText = "c.jpg";
+}
+function img_out(){
+    var image = document.querySelectorAll("img");
+    var result = document.querySelector("#result");
+    result.innerText = "";
+}
+</script>
+</head>
+<body>
+이미지 이름 알아보기<br>
+<img src="a.jpg" width="100" height="100" onmouseover="img_name1()" onmouseout="img_out()">
+<img src="b.jpg" width="100" height="100" onmouseover="img_name2()" onmouseout="img_out()">
+<img src="c.jpg" width="100" height="100" onmouseover="img_name3()" onmouseout="img_out()"><br>
+파일명:<span id="result"></span>
+</body>
+</html>

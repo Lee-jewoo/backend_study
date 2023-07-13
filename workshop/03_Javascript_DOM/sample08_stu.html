@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function equal(){
+    var passwd = document.querySelector("#passwd");
+    var passwd1 = document.querySelector("#passwd1");
+    var result = document.querySelector("#result");
+    if (passwd.value == passwd1.value){
+        result.innerText = "비밀번호 일치";
+    } else {
+        result.innerText = "비밀번호 불일치"
+    }
+    console.dir(passwd)
+}
+</script>
+</head>
+<body>
+ 비밀번호 확인 구현<br>
+ 비밀번호<input type="text" name="passwd" id="passwd"><br>
+ 비밀번호 재확인<input type="text" name="passwd1" id="passwd1" onkeyup="equal()">
+ <span id='result'></span>
+</body>
+</html>

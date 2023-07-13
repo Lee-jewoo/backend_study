@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+function save(e){
+    var result = document.querySelector("#result");
+    var v1 = document.querySelector("#v1");
+    var code = e.code;
+    if (code == 'Enter'){
+        result.innerText += v1.value + "\n";
+        v1.value = ""
+    }
+}
+</script>
+</head>
+<body>
+ 값:<input type="search" name="v1" id="v1" onkeypress="save(event)">
+  <div id="result">
+ 
+ </div>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+    function increase(){
+        var plus = document.querySelector("#quantity").value;
+        document.querySelector("#quantity").value = parseInt(plus) + 1;
+    }
+    function decrease(){
+        var minus = document.querySelector("#quantity").value;
+        if (minus != 1){
+            document.querySelector("#quantity").value = parseInt(minus) - 1;
+        }
+    }
+</script>
+</head>
+<body>
+갯수<input type="text" name="quantity"  id="quantity" value="1">
+<button id="up" onclick="increase()">+</button><button id="down" onclick="decrease()">-</button>
+</body>
+</html>

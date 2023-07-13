@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+
+  let num = prompt("정수값을 입력하시오.");
+  num = Number.parseInt(num);
+  if (num%3 == 0 && num%5 == 0 && num%7 == 0){
+      console.log("입력값:", num, "foo", "bar", "baz");
+    } else if (num%3 == 0 && num%5 == 0){
+      console.log("입력값:", num, "foo", "bar");
+    } else if (num%5 == 0 && num%7 == 0){
+      console.log("입력값:", num, "bar", "baz");
+    } else if (num%3 == 0 && num%7 == 0){
+      console.log("입력값:", num, "foo", "baz");
+    } else if (num%3 == 0){
+      console.log("입력값:", num, "foo");
+    } else if (num%5 == 0){
+      console.log("입력값:", num, "bar");
+    } else if (num%7 == 0){
+      console.log("입력값:", num, "baz");
+    }
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

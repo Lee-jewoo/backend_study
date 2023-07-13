@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <style>
+      
+      body{
+        background-image: url(main.jpg);
+      }
+      .login{
+        width: 900px;
+        margin-top: 150px;
+        margin-left: 1100px;
+      }
+      h1{
+        color: white;
+        font-size: 45px;
+      }
+      button{
+        width: 80px;
+        height: 39px;
+        background-color: #a3b926;
+        font-size: 14px;
+        color: white;
+        border: none;
+        border-radius: 5px;
+      }
+      .input{
+        width: 250px;
+        height: 30px;
+      }
+      input:focus{
+        border: 4px solid #006d94;
+      }
+
+    </style>
+    <title>Static Template</title>
+  </head>
+  <body>
+   <div class="login">
+    <form id="loginForm" action="" method="post">
+      <h1>S Mall에 오신 것을 환영합니다.</h1>
+      <h1>로그인하여 인증해주세요.</h1>
+      <input type="text" id="id" name="userid" placeholder="아이디" required maxlength="10">
+      <input type="password" id="pwd" name="passwd" placeholder="패스워드" required maxlength="10">
+      <button type="submit">로그인</button>
+      <button type="button" id="signUpBtn">회원가입</button>
+    </form>
+</div>
+  </body>
+</html>

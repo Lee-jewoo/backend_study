@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0"
+    />
+    <meta
+      http-equiv="X-UA-Compatible"
+      content="ie=edge"
+    />
+    <title>Static Template</title>
+	<style>
+
+    h1{
+      text-align: center;
+      color: white;
+      background-color: darkslategray;
+      height: 100px;
+      padding-top: 50px;
+      border: 5px solid black;
+    }
+    nav{
+      height: 50px;
+      display: flex;
+      background-color: lightgrey;
+      flex-flow: row wrap;
+      text-align: center;
+      align-content: center;
+      border: 5px solid black;
+      position: relative;
+      top: -30px;
+    }
+    nav>a{
+      flex-grow: 1;
+      border: 5px solid black;
+      padding: 10px;
+    }
+    main{
+      display: flex;
+      position: relative;
+      top: -35px;
+      border: 5px solid black;
+    }
+    article{
+      flex-basis: 80%;
+      height: 150px;
+      background-color: rgb(221, 215, 209);
+      padding-top: 20px;
+      text-indent: 1%;
+      flex-wrap: wrap;
+    }
+    aside{
+      background-color: white;
+      height: 150px;
+      float: right;
+      padding: 10px;
+      flex-wrap: wrap;
+    }
+    footer{
+      border: 5px solid black;
+      text-align: center;
+      background-color: rgb(221, 215, 209);
+      height: 100px;
+      display: flex;
+      align-items: center;
+      text-align: center;
+      justify-content: center;
+      position: relative;
+      top: -35px;
+    }
+    footer>p{
+      flex-wrap: wrap;
+    }
+    
+	</style>
+  </head>
+ <body>
+  <header>
+    <h1>Document Heading</h1>
+  </header>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Blog</a>
+    <a href="#">Careers</a>
+    <a href="#">Contact Us</a>
+  </nav>
+  <main>
+    <article>
+      <h2>This is the heading of the main section</h2>
+      <p>This is a paragraph of text.</p>
+    </article>
+    <aside>Here is the aside</aside>
+  </main>
+  <footer>
+      <p>Copyright &#169; 2017 <a href="#">My Site</a></p>
+  </footer>
+</body>
+</html>
