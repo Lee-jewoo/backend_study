@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pratice 01</title>
+    <style>
+        fieldset{
+            background-color: #cccccc;
+            width: 300px;
+            height: 250px;
+        }
+        legend{
+            background-color: grey;
+            color: aliceblue;
+            padding: 5px;
+        }
+        #submit{
+            margin-left: 100px;
+        }
+        table{
+            border: 3px double black;
+            padding: 5px;
+            text-align: center;
+        }
+        th{
+            border: 3px outset salmon;
+            padding: 5px;
+        }
+        td{
+            border: 1px solid black;
+            padding : 10px;
+        }
+        #content{
+            height: 100px;
+        }
+    </style>
+</head>
+<body>
+    <form action="target.html">
+        <fieldset>
+            <legend>Peasonalia</legend><br>
+            <label for="fname">First name:</label>
+            <input type="text" id="fname" name="fname" placeholder="제우"><br><br>
+            <label for="lname">Last name:</label>
+            <input type="text" id="lname" name="lname" placeholder="이"><br><br>
+            <label for="email">Email: </label>
+            <input type="email" id="email" name="email" placeholder="zeus0801@naver.com"><br><br>
+            <label for="bday">Birthday</label>
+            <input type="date" name="bday" id="bday"><br><br>
+            <input type="submit" name="submit" id="submit" value="제출하시오">
+        </fieldset>
+    </form><br><br><br>
+
+    <form action="target.html">
+        <table>
+            <tr>
+                <th>항목</th>
+                <th>입력</th>
+            </tr>
+            <tr>
+                <td>번호</td>
+                <td><input type="number" name="index" id="index"></td>
+            </tr>
+            <tr>
+                <td>제목</td>
+                <td><input type="text" name="title" id="title"></td>
+            </tr>
+            <tr>
+                <td>내용</td>
+                <td>
+                    <input type="text" name="content" id="content" placeholder="내용을 입력해주세요.">
+                </td>
+            </tr>
+            <tr>
+                <td>작성자</td>
+                <td><input type="text" name="writer" id="writer"></td>
+            </tr>
+            <tr align="center">
+                <td colspan="2"><input type="submit" value="글쓰기 완료"></td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>

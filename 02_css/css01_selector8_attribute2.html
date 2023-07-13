@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+      a[href="http://korea.com"]{
+        color: red;
+      }
+      a[href^="https"]{
+        background-color: yellow;
+      }
+      a[href$="net"]{
+        font-size: 40px;
+      }
+    </style>
+</head>
+<body>
+	<a href="http://naver.com">one</a><br/>
+	<a href="https://naver.com" target="_blank">two</a><br/>
+  <a href="https://daum.net">three</a><br/>
+  <a href="http://daum.net" target="_blank">four</a><br/>
+  <a href="https://korea.com">five</a><br/>
+  <a href="http://korea.com" target="_blank">six</a><br>
+</body>
+</html>
