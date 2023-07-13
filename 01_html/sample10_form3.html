@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>안녕하세요</title>
+</head>
+<body>
+    <!-- 사용자가 데이터를 입력할 수 있는 태그 -->
+    <form action="target.html">
+        이름 : <input type="text" name="username"><br>
+        비번 : <input type="password" name="passwd"><br>
+
+        <input type="radio" name="gender" value="남" checked>남 <!-- 하나만 선택 -->
+        <input type="radio" name="gender" value="여">여<br>
+
+        <input type="checkbox" name="fruit" value="사과">사과 <!-- 여러 개 선택 -->
+        <input type="checkbox" name="fruit" value="바나나">바나나
+        <input type="checkbox" name="fruit" value="메론">메론<br>
+
+        <input type="color" name="m_color">색상표<br>
+        <input type="date" name="m_date">달력<br>
+        <input type="email" name="m_email">이메일<br> <!-- 이메일 형식으로 입력해야 submit 가능 -->
+        <input type="file" name="m_file"><br> <!-- 파일 선택 -->
+        <input type="file" name="m_file" accept="image/*"><br> <!-- 이미지파일만 -->
+        <input type="file" name="m_file" multiple><br> <!-- 여러 개의 파일 선택 -->
+        <input type="hidden" name="address" value="seoul"><br>
+
+        <input type="number" name="count"><br>
+        <input type="number" name="count" min="0" max="5"><br> <!-- 입력할 수 있는 값의 최소/최대값 지정 -->
+        <input type="number" name="count" step="5"><br> <!-- 증감 간격 지정 -->
+        <input type="range" name="m_range" min="1" max="10"><br> <!-- 슬라이더 생성 -->
+        <input type="search" name="m_search"><br> <!-- 검색필드 / 내장된 초기화 버튼이 있음 -->
+
+        <select id="cars" name="cars">
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="fiat">Fiat</option>
+            <option value="audi">Audi</option>
+        </select><br>
+
+        <textarea name="message" rows="10" cols="30"> <!-- 값을 value 속성에 설정 -->
+            The cat was playing in the garden.
+        </textarea><br> <!-- value 속성이 아닌 태그의 body에 지정 -->
+
+        <input type="submit" value="로그인2">
+        <input type="reset"> <!-- submit과 함께 사용 / 사용자가 입력한 값을 초기화 -->
+    </form>
+</body>
+</html>
