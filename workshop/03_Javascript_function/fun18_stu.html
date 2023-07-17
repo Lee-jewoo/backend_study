@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+
+   function link_google() {
+      console.log(location)
+      location.href = "http://www.google.com";
+   }
+   
+   function link() {
+      var url = document.querySelector("#site");
+      location.href = url.value;
+   }
+
+</script>
+</head>
+<body>
+<h3>자바스크립트로 특정 URL 접속하기</h3>
+<button onclick="link_google()">구글사이트로 가기</button><br>
+사이트주소입력:<input type="text" name="site" id="site"><button onclick="link()">바로가기</button>
+</body>
+</html>
