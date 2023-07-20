@@ -12,21 +12,22 @@ public class Car extends Vehicle{
 	}
 
 	public void addOil(int oil) {
-		restOil += (double)oil;
+		if (restOil+oil <= getOilTankSize()) {
+			restOil += oil;
+		}
 	}
 	public void moving(int distance) {
-		restOil -= (double)distance/getEfficiency();
+		restOil -= distance/getEfficiency();
 	}
 	public void addWeight(int weight) {
-		if (weight < getMaxWeight()) {
+		if (curWeight+weight <= getMaxWeight()) {
 			curWeight += weight;
 		}
 	}
 	
 	@Override
 	public String toString() {
-		String str = String.format("%s \t\t %.1f \t\t %d", super.toString(), getRestOil(), getCurWeight());
-		return str;
+		return String.format("%s \t\t %.1f \t\t %d", super.toString(), restOil, curWeight);
 	}
 
 	public double getRestOil() {
@@ -44,7 +45,5 @@ public class Car extends Vehicle{
 	public void setCurWeight(int curWeight) {
 		this.curWeight = curWeight;
 	}
-	
 
-	
 }
