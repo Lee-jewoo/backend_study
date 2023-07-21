@@ -63,6 +63,19 @@ class K3 extends Object implements Y2, Y3{
 	
 }
 
+class Z implements Y1 {
+	public void a1() {
+		System.out.println("a1");
+	}
+	public void a2() {
+		System.out.println("a2");
+	}
+	public void a3() {
+		System.out.println("a3");
+	}
+	
+}
+
 public class InterfaceTest {
 
 	public static void main(String[] args) {
@@ -73,6 +86,16 @@ public class InterfaceTest {
 		//다형성
 		Y2 y2 = new K();
 		y2.x();
+		
+		Z z = new Z();
+		z.a1(); // 추상메서드 재정의
+		z.a2();
+		z.a3();
+		System.out.println(Y1.NUM); // 상수
+		System.out.println(Y1.SIZE);
+		System.out.println(Y1.COUNT);
+		z.b(); // default method
+		Y1.c(); // static method
 
 	}
 
