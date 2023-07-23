@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript">
+      
+      var arr = [];
+      function save() {
+            var username = document.querySelector("#username").value;
+            var age = document.querySelector("#age").value;
+            var address = document.querySelector("#address").value;
+            var person={'username':username,'age':age,'address':address};
+            arr.push(person);
+            document.querySelector("#result").innerHTML = "<h3>저장완료</h3>";
+      }
+      function show() {
+            var text = "";
+            for (i=0;i<arr.length; i++) {
+                  text += (i+1)+"번째 고객\n이름:"+arr[i].username+"\n나이:"+arr[i].age+"\n주소:"+arr[i].address+"\n";
+            }
+            document.querySelector("#result").innerText = text;
+      }
+
+</script>
+</head>
+<body>
+<h3>JSON 객체</h3>
+이름<input type="text" name="username" id="username"><br>
+나이<input type="text" name="age" id="age"><br>
+주소<input type="text" name="address" id="address"><br>
+<button onclick="save()">저장</button><br>
+<button onclick="show()">출력</button><br>
+<div id="result">
+</div>
+</body>
+</html>
