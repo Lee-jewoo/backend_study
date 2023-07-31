@@ -323,3 +323,478 @@ SELECT employee_id,last_name,salary
 FROM employees
 WHERE SIGN(salary-15000)=1;
 
+-- 날짜 함수
+-- 현재 날짜
+SELECT SYSDATE
+FROM dual;
+SELECT systimestamp
+FROM dual;
+
+-- 날짜 연산
+SELECT last_name, hire_date, TRUNC((sysdate-hire_date)/365) "년"
+FROM employees
+ORDER BY 3 desc;
+
+-- 날짜 사이의 개월 수
+SELECT last_name, hire_date, 
+trunc(MONTHS_BETWEEN(sysdate, hire_date)) "근무 월수"
+FROM employees
+ORDER BY 3 desc;
+
+-- 월 연산
+SELECT sysdate 현재, ADD_MONTHS(sysdate,1) 다음달, ADD_MONTHS(sysdate,-1) 이전달
+FROM dual;
+
+SELECT last_name, hire_date, ADD_MONTHS(hire_date , 5)
+FROM employees
+ORDER BY 3 desc;
+
+-- 가장 가까운 특정 요일의 날짜
+SELECT sysdate, next_day(sysdate, '토')
+from dual;
+
+-- 월의 마지막 날짜
+SELECT sysdate, last_day(sysdate), last_day(add_months(sysdate, 1))
+from dual;
+
+-- 날짜 반올림
+SELECT last_name, hire_date, 
+ ROUND(hire_date,'YEAR'),
+ ROUND(hire_date,'MONTH')
+FROM employees;
+
+-- 날짜 절삭
+SELECT last_name, hire_date, 
+ TRUNC(hire_date,'YEAR'),
+ TRUNC(hire_date,'MONTH')
+FROM employees;
+
+-- 변환 함수
+-- 자동 형 변환
+SELECT last_name, salary
+FROM employees
+WHERE salary = '17000';
+
+SELECT last_name, salary
+FROM employees
+WHERE hire_date = '03/06/17';
+
+-- 명시적 형 변환
+-- TO_CHAR : 숫자, 날짜를 문자로 변환
+-- 날짜 -> 문자
+select sysdate, to_char(sysdate, 'YYYY/MM/DD MON DAY DY')
+from dual;
+select sysdate, to_char(sysdate, 'YYYY"년" MM"월" DD"일"')
+from dual;
+
+select sysdate, to_char(sysdate, 'AM HH"시" MI"분" SS"초"')
+from dual;
+
+SELECT TO_CHAR(SYSDATE, 'YYYY/MM/DD,(AM) DY HH24:MI:SS')
+FROM dual;
+
+select sysdate, extract(year from sysdate),
+                extract(month from sysdate),
+                extract(day from sysdate),
+                extract(hour from systimestamp),
+                extract(minute from systimestamp),
+                extract(second from systimestamp)
+from dual;
+
+SELECT last_name,hire_date, salary
+FROM employees
+WHERE extract(month from hire_date)='09';
+
+-- 숫자 -> 문자
+SELECT last_name, salary, 
+ TO_CHAR(salary, '$999,999') 달러,
+ TO_CHAR(salary, 'L999,999') 원화
+FROM employees;
+
+select to_char(123456678, 'L999,999,999')
+from dual;
+
+-- 문자 -> 숫자
+SELECT TO_NUMBER('123') + 100 
+FROM dual;
+
+SELECT TO_NUMBER('123,456', '999,999') + 100 
+FROM dual;
+
+SELECT TO_NUMBER('$123,456', '$999,999') + 100 
+FROM dual;
+
+-- 문자 -> 날짜
+select to_date('20230727', 'YYYYMMDD')
+from dual;
+
+-- NLS_DATE_FORMAT 파라미터값 변경
+ALTER SESSION SET NLS_DATE_FORMAT='RR/MM/DD';
+
+SELECT TO_DATE( '20170802181030' , 'YYYYMMDDHH24MISS' )
+FROM dual;
+
+SELECT TO_DATE( '2017년08월02일' , 'YYYY"년"MM"월"DD"일"' )
+FROM dual;
+
+SELECT SYSDATE, SYSDATE-TO_DATE( '20170801' , 'YYYYMMDD' )
+FROM dual;
+
+-- 조건 함수 : 조건에 대해서 선택적으로 SQL문을 실행
+-- DECODE : 조건이 반드시 일치해야 되는 경우에 사용
+SELECT last_name,salary,
+ DECODE(salary, 24000, salary*0.3,
+                17000, salary*0.2,
+                salary) as 보너스
+FROM employees
+ORDER BY 2 desc;
+
+-- 입사연도 별 사원 수
+SELECT COUNT(*) "총인원수",
+ SUM(DECODE(TO_CHAR(hire_date, 'YYYY'), 2001, 1, 0)) "2001",
+ SUM(DECODE(TO_CHAR(hire_date, 'YYYY'), 2002, 1, 0)) "2002",
+ SUM(DECODE(TO_CHAR(hire_date, 'YYYY'), 2003, 1, 0)) "2003",
+ SUM(DECODE(TO_CHAR(hire_date, 'YYYY'), 2004, 1, 0)) "2004",
+ SUM(DECODE(TO_CHAR(hire_date, 'YYYY'), 2005, 1, 0)) "2005",
+ SUM(DECODE(TO_CHAR(hire_date, 'YYYY'), 2006, 1, 0)) "2006",
+ SUM(DECODE(TO_CHAR(hire_date, 'YYYY'), 2007, 1, 0)) "2007",
+ SUM(DECODE(TO_CHAR(hire_date, 'YYYY'), 2008, 1, 0)) "2008"
+FROM employees;
+
+-- DECODE 실습
+--문제 1.  각각의 사원번호에 대해 휴가 시작일과 휴가 종료일을 보여주되,
+-- 오전 오후의 속성인 SMA_VC와 EMA_VC를 이용하여 1일 경우는 오전, 2일 경우는 오후로 출력하시오.
+select EMPNO_VC as 사원번호, STDATE_VC as 휴가시작일,
+       decode(SMA_VC, 1, '오전',
+                      2, '오후') as 오전오후, 
+       EDDATE_VC as 휴가종료일,
+       decode(SMA_VC, 1, '오전',
+                      2, '오후') as 오전오후
+from T_HOLHISTORY
+order by 1 asc;
+
+
+-- 문제 2. 사원번호와 휴가신청 상태를 표시하되 상태(STATE_VC)의 
+-- 현재상태 코드가 0일 경우 허가 , 10일 경우대기 , 20일 경우 불허가로 표시하시오.
+select EMPNO_VC as 사원번호, decode(STATE_VC, 0, '허가',
+                                            10, '대기',
+                                            20, '불허가') as "현재 상태"
+from T_HOLHISTORY
+order by 1 asc;
+
+-- CASE : 다양한 비교 연산자를 이용하여 조건을 설정
+-- 동등 연산자
+SELECT last_name,salary,
+ CASE salary WHEN 24000 THEN salary*0.3
+             WHEN 17000 THEN salary*0.2
+             ELSE salary 
+ END as 보너스
+FROM employees
+ORDER BY 2 desc;
+
+-- 부등 연산자
+SELECT last_name,salary,
+ CASE WHEN salary >=20000 THEN 1000
+      WHEN salary >=15000 THEN 2000
+      WHEN salary >=10000 THEN 3000
+      ELSE 4000 
+ END as 보너스
+FROM employees
+ORDER BY 2 desc;
+
+-- BETWEEN a AND b
+SELECT last_name,salary,
+ CASE WHEN salary BETWEEN 20000 AND 25000 THEN '상'
+      WHEN salary BETWEEN 10000 AND 20001 THEN '중'
+      ELSE '하'
+ END as 등급
+FROM employees
+ORDER BY 2 desc;
+
+-- IN
+SELECT last_name,salary,
+ CASE WHEN salary IN ( 24000, 17000 , 14000) THEN '상'
+      WHEN salary IN ( 13500, 13000) THEN '중'
+      ELSE '하'
+ END as 등급
+FROM employees
+ORDER BY 2 desc;
+
+-- 그룹 함수
+-- SUM, AVG, MAX, MIN, COUNT
+SELECT SUM(DISTINCT salary), SUM(salary),
+       AVG(salary), 
+       MAX(salary), MIN(salary),
+       COUNT (*)
+FROM employees;
+
+-- 명시적 그룹핑 : GROUP BY
+select department_id, max(salary), min(salary), 
+                      avg(salary), sum(salary),
+                      count(*)
+from employees
+group by department_id
+order by 1 asc;
+
+SELECT department_id, SUM(salary)
+FROM employees
+GROUP BY department_id
+HAVING SUM(salary) >= 20000
+ORDER BY 2;
+
+-- 제약조건 검색
+select *
+from user_constraints;
+
+select *
+from user_constraints
+where table_name='EMPLOYEES';
+
+select *
+from user_constraints
+where table_name='DEPARTMENTS';
+
+-- equi 조인
+SELECT last_name, department_name
+FROM employees, departments
+WHERE employees.department_id = departments.department_id;
+
+SELECT employees.last_name, departments.department_name
+FROM employees, departments
+WHERE employees.department_id = departments.department_id;
+
+-- 공통 컬럼은 테이블명을 생략할 수 없음
+SELECT last_name, department_name, department_id
+FROM employees, departments
+WHERE employees.department_id = departments.department_id;
+
+-- 테이블 별칭을 사용할 수 있음
+SELECT emp.last_name, department_name, emp.department_id
+FROM employees emp, departments dept
+WHERE emp.department_id = dept.department_id;
+
+-- 검색 조건을 추가할 수 있음
+-- 오라클조인은 where절에 조인 조건과 검색 조건을 함께 지정
+SELECT emp.last_name, salary, department_name 
+FROM employees emp, departments dept
+WHERE emp.department_id = dept.department_id AND last_name='Whalen';
+
+SELECT d.department_name 부서명, COUNT(e.employee_id) 인원수
+FROM employees e, departments d
+WHERE e.department_id = d.department_id
+AND TO_CHAR( hire_date , 'YYYY') <= 2005
+GROUP BY d.department_name
+order by 2 asc;
+
+-- non equi 조인
+SELECT last_name, salary, grade_level
+FROM employees e, job_grades g
+WHERE e.salary BETWEEN g.lowest_sal AND g.highest_sal;
+
+SELECT last_name, salary, department_name, grade_level
+FROM employees e, departments d, job_grades g
+WHERE e.department_id = d.department_id
+AND e.salary BETWEEN g.lowest_sal AND g.highest_sal;
+
+-- self 조인
+SELECT e.last_name as e, m.last_name as m, m2.last_name as m2 
+FROM employees e, employees m, employees m2
+WHERE e.manager_id = m.employee_id AND m.manager_id = m2.employee_id;
+
+-- outer 조인
+SELECT emp.last_name, department_name, emp.department_id
+FROM employees emp, departments dept
+WHERE emp.department_id = dept.department_id(+);
+
+SELECT e.last_name 사원명, m.last_name 관리자명 
+FROM employees e, employees m
+WHERE e.manager_id = m.employee_id(+);
+
+SELECT e.last_name 사원명,
+ m.last_name 관리자명, mm.last_name "관리자의 관리자명" 
+FROM employees e, employees m , employees mm
+WHERE e.manager_id = m.employee_id(+) 
+AND m.manager_id = mm.employee_id(+);
+
+-- cartesian product 조인
+-- 조인 조건이 없을 때 : 모든 데이터를 출력
+SELECT emp.last_name, department_name, emp.department_id
+FROM employees emp, departments dept;
+
+--ANSI 조인
+-- Natural join
+-- 공통 컬럼에는 테이블명, 별칭을 사용할 수 없음
+SELECT last_name, department_name, department_id
+FROM employees NATURAL JOIN departments;
+
+SELECT last_name, department_name, department_id
+FROM employees e NATURAL JOIN departments d
+WHERE department_id=90;
+
+-- using join
+SELECT last_name, department_name, department_id
+FROM employees e JOIN departments d USING(department_id);
+
+SELECT last_name, department_name, department_id
+FROM employees e JOIN departments d USING(department_id)
+WHERE department_id = 90;
+
+-- ON 절
+SELECT last_name, department_name, e.department_id
+FROM employees e JOIN departments d ON e.department_id = d.department_id;
+
+SELECT last_name, department_name, e.department_id
+FROM employees e INNER JOIN departments d ON e.department_id = d.department_id
+WHERE d.department_id = 90;
+
+SELECT last_name, salary, grade_level
+FROM employees e INNER JOIN job_grades g ON e.salary BETWEEN g.lowest_sal AND g.highest_sal;
+
+SELECT e.last_name as e, m.last_name as m
+FROM employees e INNER JOIN employees m ON e.manager_id = m.employee_id;
+
+SELECT e.last_name 사원명, d.department_name 부서명,
+ g.grade_level 등급
+FROM employees e INNER JOIN departments d 
+ON e.department_id = d.department_id
+ INNER JOIN job_grades g
+ON e.salary BETWEEN g.lowest_sal AND g.highest_sal;
+
+-- cross join
+SELECT last_name, department_name, e.department_id
+FROM employees e CROSS JOIN departments d;
+
+-- outer join
+SELECT last_name, department_name, department_id
+FROM employees e LEFT OUTER JOIN departments d USING(department_id);
+
+SELECT last_name, department_name, e.department_id
+FROM departments d RIGHT OUTER JOIN employees e ON e.department_id = d.department_id;
+
+-- 서브쿼리 (subquery)
+-- 서브쿼리 사용 전
+SELECT salary
+FROM employees
+WHERE last_name='Whalen';
+
+SELECT last_name,salary
+FROM employees
+WHERE salary >= 4400;
+
+-- 서브쿼리 사용 후
+SELECT last_name,salary
+FROM employees
+WHERE salary >= (SELECT salary
+                 FROM employees
+                 WHERE last_name='Whalen');
+                 
+-- 단일행 서브쿼리
+-- 평균 월급보다 더 많은 월급을 받는 사원
+select *
+from employees
+where salary>(select avg(salary)
+              from employees);
+
+-- 부서번호가 100인 사원들 중에서 최대 월급을 받는 사원과 동일한 월급을 받는 사원
+select last_name, salary
+from employees
+where salary = (select max(salary)
+               from employees
+               where department_id=100);
+
+-- 100번 부서의 최대 월급보다 많은 모든 부서 정보를 출력
+SELECT department_id, MAX(salary)
+FROM employees
+GROUP BY department_id
+HAVING MAX(salary) > (SELECT MAX(salary)
+                      FROM employees
+                      WHERE department_id=100);
+
+-- 복수행 서브쿼리
+-- IN
+-- Whalen 또는 Fay 사원과 같은 월급을 받는 모든 사원들의 정보를 출력
+SELECT last_name, salary
+FROM employees
+WHERE salary IN (SELECT salary
+                 FROM employees
+                 WHERE last_name IN ('Whalen','Fay'));
+
+-- >ALL
+SELECT last_name, department_id, salary
+FROM employees
+WHERE salary > ALL (SELECT salary
+                    FROM employees
+                    WHERE job_id = 'IT_PROG');
+                    
+SELECT last_name, department_id, salary
+FROM employees
+WHERE salary > (SELECT max(salary)
+                FROM employees
+                WHERE job_id = 'IT_PROG');
+                  
+-- <ALL
+SELECT last_name, department_id, salary
+FROM employees
+WHERE salary < ALL (SELECT salary
+                    FROM employees
+                    WHERE job_id = 'IT_PROG');
+SELECT last_name, department_id, salary
+FROM employees
+WHERE salary < (SELECT min(salary)
+                FROM employees
+                WHERE job_id = 'IT_PROG');
+
+-- >ANY
+SELECT last_name, department_id, salary
+FROM employees
+WHERE salary > ANY (SELECT salary
+                    FROM employees
+                    WHERE job_id = 'IT_PROG');
+SELECT last_name, department_id, salary
+FROM employees
+WHERE salary > (SELECT min(salary)
+                FROM employees
+                WHERE job_id = 'IT_PROG');
+                
+-- <ANY
+SELECT last_name, department_id, salary
+FROM employees
+WHERE salary < ANY (SELECT salary
+               FROM employees
+               WHERE job_id = 'IT_PROG');
+               
+SELECT last_name, department_id, salary
+FROM employees
+WHERE salary < (SELECT max(salary)
+                FROM employees
+                WHERE job_id = 'IT_PROG');
+
+-- EXISTS
+SELECT last_name, department_id, salary
+FROM employees
+WHERE EXISTS (SELECT employee_id
+              FROM employees
+              WHERE commission_pct IS NOT NULL);
+
+SELECT last_name, department_id, salary
+FROM employees
+WHERE EXISTS (SELECT employee_id
+              FROM employees
+              WHERE salary<0);
+              
+-- 다중 컬럼 서브쿼리
+SELECT last_name, department_id, salary
+FROM employees
+WHERE (department_id, salary) IN (SELECT department_id, MAX(salary)
+                                  FROM employees
+                                  GROUP BY department_id)
+ORDER BY 2;
+
+-- 인라인 뷰(in-line view) 
+SELECT e.department_id, 합계, 평균, 인원수
+FROM (SELECT department_id, SUM(salary) 합계, AVG(salary) 평균 ,
+      COUNT(*) 인원수 
+      FROM employees
+      GROUP BY department_id) e, departments d
+WHERE e.department_id = d.department_id
+ORDER By 1;
