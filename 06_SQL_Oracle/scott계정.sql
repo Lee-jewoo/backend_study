@@ -1,34 +1,34 @@
 show user;
--- ÄÃ·³¸íÀ» ÁöÁ¤ÇØ ·¹ÄÚµå Ãß°¡
+-- ì»¬ëŸ¼ëª…ì„ ì§€ì •í•´ ë ˆì½”ë“œ ì¶”ê°€
 INSERT INTO dept( deptno, dname, loc )
-VALUES ( 50 ,'°³¹ß','¼­¿ï');
+VALUES ( 50 ,'ê°œë°œ','ì„œìš¸');
 
 INSERT INTO dept( deptno, dname )
-VALUES ( 51 ,'°³¹ß');
+VALUES ( 51 ,'ê°œë°œ');
 
--- ÄÃ·³¸íÀ» ÁöÁ¤ÇÏÁö ¾Ê°í ·¹ÄÚµå Ãß°¡
+-- ì»¬ëŸ¼ëª…ì„ ì§€ì •í•˜ì§€ ì•Šê³  ë ˆì½”ë“œ ì¶”ê°€
 INSERT INTO dept
-VALUES ( 60, 'ÀÎ»ç', '°æ±â');
+VALUES ( 60, 'ì¸ì‚¬', 'ê²½ê¸°');
 
 INSERT INTO dept
-VALUES ( 61, 'ÀÎ»ç'); -- ¿¡·¯
+VALUES ( 61, 'ì¸ì‚¬'); -- ì—ëŸ¬
 
--- null °ª ÀúÀå
+-- null ê°’ ì €ì¥
 INSERT INTO dept(deptno, dname , loc )
-VALUES ( 80, 'ÀÎ»ç', NULL );
+VALUES ( 80, 'ì¸ì‚¬', NULL );
 
--- ºó Å×ÀÌºí »ı¼º
+-- ë¹ˆ í…Œì´ë¸” ìƒì„±
 CREATE TABLE mydept
 AS
 SELECT * FROM dept
 WHERE 1=2;
 
--- µ¥ÀÌÅÍ Æ÷ÇÔ Å×ÀÌºí »ı¼º
+-- ë°ì´í„° í¬í•¨ í…Œì´ë¸” ìƒì„±
 CREATE TABLE mydept2
 AS
 SELECT * FROM dept;
 
--- mydept¿¡ º¹¼öÇà »ğÀÔ
+-- mydeptì— ë³µìˆ˜í–‰ ì‚½ì…
 select *
 from mydept;
 
@@ -36,8 +36,8 @@ INSERT INTO mydept
 SELECT deptno, dname, loc
 FROM dept;
 
--- º¹¼ö Å×ÀÌºí¿¡ º¹¼öÇà »ğÀÔ
--- ¹«Á¶°Ç insert all
+-- ë³µìˆ˜ í…Œì´ë¸”ì— ë³µìˆ˜í–‰ ì‚½ì…
+-- ë¬´ì¡°ê±´ insert all
 CREATE TABLE myemp_hire
 AS
 SELECT empno, ename, hiredate, sal
@@ -61,7 +61,7 @@ from myemp_hire;
 select *
 from myemp_mgr;
 
--- Á¶°Ç insert all
+-- ì¡°ê±´ insert all
 CREATE TABLE myemp_hire2
 AS
 SELECT empno, ename, hiredate, sal
@@ -117,11 +117,12 @@ from myemp_mgr3;
 select *
 from mydept;
 UPDATE mydept
-SET dname='¿µ¾÷',loc='°æ±â' WHERE deptno = 50;
+SET dname='ì˜ì—…',loc='ê²½ê¸°'
+WHERE deptno = 50;
 UPDATE mydept
-SET dname='¿µ¾÷',loc='°æ±â';
+SET dname='ì˜ì—…',loc='ê²½ê¸°';
 rollback;
--- subquery¸¦ ÀÌ¿ëÇÑ update
+-- subqueryë¥¼ ì´ìš©í•œ update
 UPDATE mydept
 SET dname= ( SELECT dname
              FROM dept
@@ -139,7 +140,7 @@ rollback;
 
 select *
 from mydept;
--- subquery¸¦ ÀÌ¿ëÇÑ update
+-- subqueryë¥¼ ì´ìš©í•œ delete
 DELETE 
 FROM mydept
 WHERE loc = (SELECT loc
@@ -151,31 +152,31 @@ commit;
 select *
 from mydept;
 
--- ÇÑ±Û ¹ÙÀÌÆ® È®ÀÎ
+-- í•œê¸€ ë°”ì´íŠ¸ í™•ì¸
 select *
 from NLS_DATABASE_PARAMETERS;
 
--- table »ı¼º
--- ÀÏ¹İÀû ¹æ¹ı 1
+-- table ìƒì„±
+-- ì¼ë°˜ì  ë°©ë²• 1
 CREATE TABLE scott.employee
 ( empno NUMBER(4),
   ename VARCHAR2(20),
   hiredate DATE,
   sal NUMBER(7,2));
 
--- ÀÏ¹İÀû ¹æ¹ı 2. default
+-- ì¼ë°˜ì  ë°©ë²• 2. default
 CREATE TABLE employee2
 ( empno NUMBER(4),
   ename VARCHAR2(20),
   hiredate DATE DEFAULT SYSDATE,
   sal NUMBER(7,2));
 INSERT INTO employee2 (empno, ename, sal)
-VALUES ( 10, 'È«±æµ¿', 3000);
+VALUES ( 10, 'í™ê¸¸ë™', 3000);
 select *
 from employee2;
 
--- ÀÏ¹İÀû ¹æ¹ı 3. Á¦¾àÁ¶°Ç
--- ÄÃ·³ ·¹º§ primary key
+-- ì¼ë°˜ì  ë°©ë²• 3. ì œì•½ì¡°ê±´
+-- ì»¬ëŸ¼ ë ˆë²¨ primary key
 CREATE TABLE department
 (deptno NUMBER(2) CONSTRAINT department_deptno_pk PRIMARY KEY,
  dname VARCHAR2(15),
@@ -184,12 +185,12 @@ CREATE TABLE department10
 (deptno NUMBER(2) PRIMARY KEY,
  dname VARCHAR2(15),
  loc VARCHAR2(15));
--- Á¦¾à Á¶°Ç È®ÀÎ
+-- ì œì•½ ì¡°ê±´ í™•ì¸
 select *
 from user_constraints
 where table_name = 'DEPARTMENT10';
 
--- Å×ÀÌºí ·¹º§ primary key
+-- í…Œì´ë¸” ë ˆë²¨ primary key
 CREATE TABLE department2
 ( deptno NUMBER(2), 
   dname VARCHAR2(15),
@@ -200,7 +201,7 @@ select *
 from user_constraints
 where table_name = 'DEPARTMENT2';
 
--- º¹ÇÕ ÄÃ·³ÀÇ Á¦¾à Á¶°Ç ÁöÁ¤
+-- ë³µí•© ì»¬ëŸ¼ì˜ ì œì•½ ì¡°ê±´ ì§€ì •
 CREATE TABLE department3
 ( deptno NUMBER(2), 
   dname VARCHAR2(15),
@@ -211,7 +212,7 @@ select *
 from user_constraints
 where table_name = 'DEPARTMENT3';
 
--- ÄÃ·³ ·¹º§ unique
+-- ì»¬ëŸ¼ ë ˆë²¨ unique
 CREATE TABLE department4
 ( deptno NUMBER(2) CONSTRAINT department4_deptno_pk PRIMARY KEY,
   dname VARCHAR2(15) CONSTRAINT department4_dname_uk UNIQUE,
@@ -219,7 +220,7 @@ CREATE TABLE department4
 insert into department4 (deptno, dname, loc) values (1, 'aa', 'bb');
 insert into department4 (deptno, dname, loc) values (2, null, 'bb');
 
--- Å×ÀÌºí ·¹º§ unique
+-- í…Œì´ë¸” ë ˆë²¨ unique
 CREATE TABLE department5
 (deptno NUMBER(2) CONSTRAINT department5_deptno_pk PRIMARY KEY,
  dname VARCHAR2(15), 
@@ -235,12 +236,13 @@ CREATE TABLE department11
  CONSTRAINT department11_dname_uk UNIQUE(dname)
 );
 
--- ÄÃ·³ ·¹º§ not null
+-- ì»¬ëŸ¼ ë ˆë²¨ not null
 CREATE TABLE department6
 (deptno NUMBER(2) CONSTRAINT department6_deptno_pk PRIMARY KEY,
  dname VARCHAR2(15) CONSTRAINT department6_dname_uk UNIQUE,
  loc VARCHAR2(15) CONSTRAINT department6_loc_nn NOT NULL);
 
+-- í…Œì´ë¸” ë ˆë²¨ unique
 CREATE TABLE department12
 (deptno NUMBER(2),
  dname VARCHAR2(15),
@@ -249,30 +251,30 @@ CREATE TABLE department12
  CONSTRAINT department12_dname_uk UNIQUE(dname)
  );
 
--- ÄÃ·³ ·¹º§ check
+-- ì»¬ëŸ¼ ë ˆë²¨ check
 CREATE TABLE department7
 (deptno NUMBER(2),
  dname VARCHAR2(15)
- CONSTRAINT department7_dname_ck CHECK(dname IN('°³¹ß','ÀÎ»ç')),
+ CONSTRAINT department7_dname_ck CHECK(dname IN('ê°œë°œ','ì¸ì‚¬')),
  loc VARCHAR2(15) 
 );
-insert into department7 (deptno, dname, loc) values (1, '°³¹ß', 'bb');
-insert into department7 (deptno, dname, loc) values (2, 'ÀÎ»ç', 'bb');
-insert into department7 (deptno, dname, loc) values (3, '°ü¸®', 'bb');
+insert into department7 (deptno, dname, loc) values (1, 'ê°œë°œ', 'bb');
+insert into department7 (deptno, dname, loc) values (2, 'ì¸ì‚¬', 'bb');
+-- insert into department7 (deptno, dname, loc) values (3, 'ê´€ë¦¬', 'bb');
 
--- Å×ÀÌºí ·¹º§ check
+-- í…Œì´ë¸” ë ˆë²¨ check
 CREATE TABLE department8
 (deptno NUMBER(2),
  dname VARCHAR2(15),
  loc VARCHAR2(15),
- CONSTRAINT department8_dname_ck CHECK(dname IN('°³¹ß','ÀÎ»ç')) 
+ CONSTRAINT department8_dname_ck CHECK(dname IN('ê°œë°œ','ì¸ì‚¬')) 
 );
-insert into department8 (deptno, dname, loc) values (1, '°³¹ß', 'bb');
-insert into department8 (deptno, dname, loc) values (2, 'ÀÎ»ç', 'bb');
--- insert into department8 (deptno, dname, loc) values (3, '°ü¸®', 'bb');
+insert into department8 (deptno, dname, loc) values (1, 'ê°œë°œ', 'bb');
+insert into department8 (deptno, dname, loc) values (2, 'ì¸ì‚¬', 'bb');
+-- insert into department8 (deptno, dname, loc) values (3, 'ê´€ë¦¬', 'bb');
 
--- ÄÃ·³ ·¹º§ foreign key
--- master Å×ÀÌºí
+-- ì»¬ëŸ¼ ë ˆë²¨ foreign key
+-- master í…Œì´ë¸”
 create table m1
 (no NUMBER(2) CONSTRAINT m1_no_pk PRIMARY KEY, 
  name VARCHAR2(10));
@@ -282,7 +284,7 @@ insert into m1 (no, name) values (30, 'cc');
 commit;
 select *
 from m1;
--- slave Å×ÀÌºí
+-- slave í…Œì´ë¸”
 create table s1
 (num NUMBER(4) CONSTRAINT s1_num_pk PRIMARY KEY,
  email VARCHAR(20),
@@ -293,8 +295,8 @@ insert into s1 (num, email, no) values (300, 'xx3', 30);
 insert into s1 (num, email, no) values (400, 'xx4', null);
 -- insert into s1 (num, email, no) values (500, 'xx5', 50);
 
--- Å×ÀÌºí ·¹º§ foreign key
--- master Å×ÀÌºí
+-- í…Œì´ë¸” ë ˆë²¨ foreign key
+-- master í…Œì´ë¸”
 create table m2
 (no NUMBER(2) CONSTRAINT m2_no_pk PRIMARY KEY, 
  name VARCHAR2(10));
@@ -304,7 +306,7 @@ insert into m2 (no, name) values (30, 'cc');
 commit;
 select *
 from m2;
--- slave Å×ÀÌºí
+-- slave í…Œì´ë¸”
 create table s2
 (num NUMBER(4) CONSTRAINT s2_num_pk PRIMARY KEY,
  email VARCHAR(20),
@@ -317,7 +319,7 @@ insert into s2 (num, email, no) values (400, 'xx4', null);
 -- insert into s1 (num, email, no) values (500, 'xx5', 50);
 
 -- ON DELETE CASCADE
--- fk°¡ ÂüÁ¶ÇÏ°í ÀÖ´Â °ÍÀ» »èÁ¦ÇÒ ¼ö ÀÖµµ·Ï ÇÔ
+-- fkê°€ ì°¸ì¡°í•˜ê³  ìˆëŠ” ê²ƒì„ ì‚­ì œí•  ìˆ˜ ìˆë„ë¡ í•¨
 create table m3
 (no NUMBER(2) CONSTRAINT m3_no_pk PRIMARY KEY, 
  name VARCHAR2(10));
@@ -346,7 +348,7 @@ delete from m3
 where no = 10;
 
 -- ON DELETE SET NULL
--- master Å×ÀÌºíÀÇ »èÁ¦ÇÑ °ªÀ» null·Î ÀúÀå
+-- master í…Œì´ë¸”ì˜ ì‚­ì œí•œ ê°’ì„ nullë¡œ ì €ì¥
 create table m4
 (no NUMBER(2) CONSTRAINT m4_no_pk PRIMARY KEY, 
  name VARCHAR2(10));
@@ -374,26 +376,26 @@ from s4;
 delete from m4
 where no=10;
 
--- Å×ÀÌºí »èÁ¦
+-- í…Œì´ë¸” ì‚­ì œ
 drop table mydept;
 drop table mydept2;
 
--- m1°ú s1ÀÇ Á¦¾à Á¶°Ç È®ÀÎ
+-- m1ê³¼ s1ì˜ ì œì•½ ì¡°ê±´ í™•ì¸
 select *
 from user_constraints
 where table_name='S1';
--- Á¦¾à Á¶°Ç, Å×ÀÌºí »èÁ¦
+-- ì œì•½ ì¡°ê±´, í…Œì´ë¸” ì‚­ì œ
 drop table m1 CASCADE CONSTRAINT;
 
--- Å×ÀÌºí »ı¼º ½Ç½À
--- ¿¹Á¦ 1. subject Å×ÀÌºí
+-- í…Œì´ë¸” ìƒì„± ì‹¤ìŠµ
+-- ì˜ˆì œ 1. subject í…Œì´ë¸”
 create table subject
 (subno NUMBER(5) CONSTRAINT subject_subno_pk primary key,
  subname VARCHAR2(20) CONSTRAINT subject_subname_nn not null,
  term VARCHAR2(1) CONSTRAINT subject_term_ck check (term in ('1','2')),
- type VARCHAR2(4) CONSTRAINT subject_type_ck check (type in ('ÇÊ¼ö','¼±ÅÃ')));
+ type VARCHAR2(4) CONSTRAINT subject_type_ck check (type in ('í•„ìˆ˜','ì„ íƒ')));
  
--- ¿¹Á¦ 2. sugang Å×ÀÌºí
+-- ì˜ˆì œ 2. sugang í…Œì´ë¸”
 create table student
 ( studno number(5) constraint student_studno_pk PRIMARY KEY,
   stuname varchar2(10));
@@ -405,16 +407,197 @@ create table sugang
  result number(3),
  constraint sugang_studno_subno_pk primary key(studno, subno));
  
+-- Alter
+CREATE TABLE emp04
+AS
+SELECT * FROM emp;
 
+-- ì»¬ëŸ¼ ì¶”ê°€
+ALTER TABLE emp04
+ADD (email VARCHAR2(10), address VARCHAR2(20));
 
+-- ì»¬ëŸ¼ ë³€ê²½
+ALTER TABLE emp04
+MODIFY (email VARCHAR2(40));
 
+-- ì»¬ëŸ¼ ì‚­ì œ
+ALTER TABLE emp04
+DROP ( email );
 
+-- ì œì•½ì¡°ê±´ ì¶”ê°€
+CREATE TABLE dept03
+(deptno NUMBER(2),
+ dname VARCHAR2(15),
+ loc VARCHAR2(15)
+);
 
+-- primary key ì¶”ê°€
+alter table dept03
+add constraint dept03_deptno_pk primary key(deptno);
 
+-- unique ì¶”ê°€
+alter table dept03
+add constraint dept03_loc_uk unique (loc);
 
+-- not null ë³€ê²½
+ALTER TABLE dept03
+MODIFY ( dname VARCHAR2(15) CONSTRAINT dept03_dname_nn NOT NULL );
 
+-- ì œì•½ì¡°ê±´ ì‚­ì œ
+-- primary key ì‚­ì œ
+ALTER TABLE dept03
+DROP PRIMARY KEY;
 
+-- unique ì‚­ì œ
+alter table dept03
+drop unique(loc);
 
+-- not null ì‚­ì œ
+ALTER TABLE dept03
+DROP CONSTRAINT dept03_dname_nn;
 
+-- ì°¸ì¡°í•˜ê³  ìˆëŠ” ì œì•½ì¡°ê±´ ì‚­ì œ
+alter table m2
+drop constraint m2_no_pk cascade;
 
+-- VIEW
+-- ë³µì¡í•œ ì¡°ì¸ë¬¸
+SELECT empno,ename, d.dname, d.deptno
+FROM emp e JOIN dept d
+ON e.deptno = d.deptno
+WHERE e.deptno = 20;
 
+-- view ë¡œ ë‹¨ìˆœí™”
+CREATE VIEW emp_view
+AS
+SELECT empno,ename, d.dname, d.deptno
+FROM emp e JOIN dept d
+ON e.deptno = d.deptno
+WHERE e.deptno = 20;
+
+-- view ì‹¤í–‰
+SELECT *
+FROM emp_view;
+
+-- ë·°ë¥¼ ë§Œë“¤ ë•Œ ë³„ì¹­ ì§€ì •
+CREATE VIEW emp_view10 (no, name, dname, dno)
+AS
+SELECT empno, ename, d.dname, d.deptno
+FROM emp e JOIN dept d
+ON e.deptno = d.deptno
+WHERE e.deptno = 20;
+
+select *
+from emp_view10;
+
+-- íŠ¹ì • ì»¬ëŸ¼ì„ ë³´í˜¸ (ë¯¼ê°í•œ ì •ë³´ ì œì™¸)
+CREATE VIEW emp_view2
+AS
+SELECT empno, ename, job, mgr, hiredate, comm, deptno
+FROM emp;
+
+select*
+from emp_view2;
+
+-- view ìˆ˜ì •
+CREATE OR REPLACE VIEW emp_view2
+AS
+SELECT empno, ename, job
+FROM emp;
+
+-- with read only
+create table copy_emp
+as
+select *
+from emp;
+
+create or replace view copy_emp_view
+as
+select *
+from copy_emp
+with read only;
+-- ì‚­ì œ ë¶ˆê°€
+delete from copy_emp_view
+where deptno=20;
+
+-- view ì‚­ì œ
+drop view copy_emp_view;
+
+select *
+from user_views;
+
+-- ì‹œí€€ìŠ¤
+-- base table
+create table copy_dept
+as
+select deptno as no, dname as name, loc as addr
+from dept
+where 1=2;
+
+select *
+from copy_dept;
+
+-- ì¦ê°€í•˜ëŠ” ì‹œí€€ìŠ¤ ìƒì„±
+CREATE SEQUENCE copy_dept_no_seq
+ START WITH 10
+ INCREMENT BY 10
+ MAXVALUE 100
+ MINVALUE 5
+ CYCLE
+ NOCACHE;
+ 
+select copy_dept_no_seq.nextval
+from dual;
+
+-- ê°ì†Œí•˜ëŠ” ì‹œí€€ìŠ¤ ìƒì„±
+CREATE SEQUENCE dept_deptno_seq2
+ START WITH 100
+ INCREMENT BY -10
+ MAXVALUE 150
+ MINVALUE 10
+ CYCLE
+ NOCACHE;
+
+SELECT dept_deptno_seq2.NEXTVAL, dept_deptno_seq2.CURRVAL
+FROM dual;
+
+-- ê¸°ë³¸ê°’
+create sequence my_seq;
+
+-- ë©”íƒ€ì •ë³´
+select *
+from user_sequences;
+
+-- ë² ì´ìŠ¤í…Œì´ë¸”ì— ì‹œí€€ìŠ¤ ì‚½ì…
+insert into copy_dept (no, name, addr)
+values (my_seq.nextval, 'aa', 'ì„œìš¸');
+insert into copy_dept (no, name, addr)
+values (my_seq.nextval, 'bb', 'ê²½ê¸°');
+insert into copy_dept (no, name, addr)
+values (my_seq.nextval, 'cc', 'ì¸ì²œ');
+
+-- ì‹œí€€ìŠ¤ ì‚­ì œ
+drop sequence dept_deptno_seq2;
+
+-- index
+-- index ê°ì²´ê°€ ê°€ì§„ ì£¼ì†Œê°’
+select rowid, empno, ename
+from emp;
+--AAAE8k   AAE    AAAAF7  AAA
+--í…Œì´ë¸”ì •ë³´ íŒŒì¼ì •ë³´ ë¸”ëŸ­ì •ë³´ ë¸”ëŸ­ ë‚´ í–‰ì •ë³´
+
+-- EMPì˜ pkì¸ empnoë¡œ ì¸í•´ ì¸ë±ìŠ¤ê°€ ìë™ ìƒì„±
+select *
+from user_indexes
+where table_name='EMP';
+
+-- enameì— ì¸ë±ìŠ¤ ì§€ì •
+CREATE INDEX emp_ename_idx
+ON emp(ename);
+
+select *
+from emp
+where ename='SMITH';
+
+-- ì¸ë±ìŠ¤ ì‚­ì œ
+drop index emp_ename_idx;
