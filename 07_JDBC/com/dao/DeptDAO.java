@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import com.dto.DeptDTO;
+import com.exception.DuplicatedDeptnoException;
 
 // Oracle의 dept 테이블을 연동하는 클래스
 public class DeptDAO {
@@ -43,5 +44,55 @@ public class DeptDAO {
 		}
 		return list;
 	}
+	
+	// insert 기능을 하는 method
+	public int insert(Connection con, DeptDTO dto) throws DuplicatedDeptnoException{
+		int num = 0;
+		PreparedStatement pstmt = null;
+		try {
+			String sql = "insert into dept (deptno, dname, loc) "
+					+ " values(?, ?, ?)";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, dto.getDeptno());
+			pstmt.setString(2, dto.getDname());
+			pstmt.setString(3, dto.getLoc());
+			num = pstmt.executeUpdate();
+		} catch (SQLException e) {
+//			e.printStackTrace();
+			throw new DuplicatedDeptnoException("deptno 중복 : "+dto.getDeptno());
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return num;
+	}
+	// update 기능을 하는 method
+	public int update(Connection con, DeptDTO dto) {
+		int num = 0;
+		PreparedStatement pstmt = null;
+		try {
+			String sql = "update dept set dname=?, loc=? where deptno=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(3, dto.getDeptno());
+			pstmt.setString(1, dto.getDname());
+			pstmt.setString(2, dto.getLoc());
+			num = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null)
+					pstmt.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return num;
+	}
+	
 
 }
