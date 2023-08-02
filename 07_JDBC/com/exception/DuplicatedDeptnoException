@@ -1,0 +1,12 @@
+package com.exception;
+
+// 사용자 정의 예외 클래스
+public class DuplicatedDeptnoException extends Exception{
+
+	public DuplicatedDeptnoException(String message) {
+		super(message);
+	}
+	
+	
+
+}
