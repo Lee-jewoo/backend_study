@@ -94,5 +94,28 @@ public class DeptDAO {
 		return num;
 	}
 	
+	// delete 기능을 하는 method
+	public int delete(Connection con, int deptno) {
+		int num = 0;
+		PreparedStatement pstmt = null;
+		try {
+			String sql = "delete from dept where deptno=?";
+			pstmt = con.prepareStatement(sql);
+			pstmt.setInt(1, deptno);
+			num = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return num;
+	}
+	
 
 }
