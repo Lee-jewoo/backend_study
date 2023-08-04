@@ -16,5 +16,11 @@ public interface DeptService {
 	// update를 위한 메서드
 	public int update(DeptDTO dto);
 	
+	// delete를 위한 메서드
+	public int delete(int deptno);
+	
+	// delete와 update를 동시에 하는 메서드
+	public int update_delete(DeptDTO dto, int deptno);
+	
 
 }
