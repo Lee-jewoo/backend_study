@@ -5,10 +5,50 @@
 
 <mapper namespace="BoardMapper">
 
-	<select id="list" resultType="BoardDTO">
+	<!-- 목록 보기, 검색하기 -->
+	<select id="list" resultType="BoardDTO" parameterType="hashmap">
 		select num, title, author, content, writeday, readcnt
 		from board
+		<if test="searchName=='title' and searchValue!=null">
+			where title like '%'||#{searchValue}||'%'
+		</if>
+		<if test="searchName=='author' and searchValue!=null">
+			where author like '%'||#{searchValue}||'%'
+		</if>
 		order by 1 desc
 	</select>
-
+	
+	<!-- 글 작성하기 -->
+	<insert id="write" parameterType="BoardDTO">
+		insert into board (num, title, author, content)
+		values (board_seq.nextval, #{title}, #{author}, #{content})
+	</insert>
+	
+	<!-- 글 조회하기 -->
+	<select id="retrieve" parameterType="int" resultType="BoardDTO">
+		select num, title, author, content, writeday, readcnt
+		from board
+		where num = #{num}
+	</select>
+	
+	<!-- 조회수 -->
+	<update id="readcnt" parameterType="int">
+		update board
+		set readcnt = readcnt+1
+		where num = #{num}
+	</update>
+	
+	<!-- 글 수정하기 -->
+	<update id="update" parameterType="BoardDTO">
+		update board
+		set title=#{title}, author=#{author}, content=#{content}
+		where num = #{num}
+	</update>
+	
+	<!-- 글 삭제하기 -->
+	<delete id="delete" parameterType="int">
+		delete from board
+		where num = #{num}
+	</delete>
+	
 </mapper>

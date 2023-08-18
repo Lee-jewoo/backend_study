@@ -7,6 +7,16 @@
 <head>
 <meta charset="UTF-8">
 <title>게시판 프로젝트</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+	<script> // 글 삭제하기
+		$(document).ready(function(){
+			$("button").on("click", function(){
+				var num = $(this).attr("data-num");
+				alert(num+"번 글을 삭제하시겠습니까?");
+				location.href="delete?num="+num;
+			});
+		});
+	</script>
 </head>
 <body>
 	<h2>게시판 목록 보기</h2>
@@ -14,12 +24,25 @@
 	List<BoardDTO> list = (List<BoardDTO>)request.getAttribute("boardList");
 	%>
 	<table border='1'>
+		<tr> <!-- 검색하기 -->
+			<td colspan="6">
+				<form action="list">
+					<select name="searchName">
+						<option value="title">제목</option>
+						<option value="author">작성자</option>
+					</select>
+					<input type="text" name="searchValue">
+					<input type="submit" value="검색">
+				</form>
+			</td>
+		</tr>
 		<tr>
 			<th>글번호</th>
 			<th>제목</th>
 			<th>작성자</th>
 			<th>작성일</th>
 			<th>조회수</th>
+			<th>삭제</th>
 		</tr>
 		<%
 		for (BoardDTO dto : list) {
@@ -31,15 +54,18 @@
 		%>
 		<tr>
 			<td><%= n %></td>
-			<td><%= title %></td>
+			<td><a href="retrieve?num=<%= n %>"><%= title %></a></td>
 			<td><%= author %></td>
 			<td><%= writeday %></td>
 			<td><%= readcnt %></td>
+			<td><button data-num="<%= n %>">삭제</button></td>
 		</tr>
 		<%
 		}
 		%>
 	</table>
+	<hr>
+	<a href="writeui">작성하기</a>&nbsp;&nbsp;<a href="list">전체 목록</a>
 
 </body>
 </html>

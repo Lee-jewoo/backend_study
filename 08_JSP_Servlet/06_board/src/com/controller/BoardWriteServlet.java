@@ -1,8 +1,6 @@
 package com.controller;
 
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,30 +12,35 @@ import com.dto.BoardDTO;
 import com.service.BoardService;
 import com.service.BoardServiceImpl;
 
-@WebServlet("/list")
-public class BoardListServlet extends HttpServlet {
+@WebServlet("/write")
+public class BoardWriteServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 검색하기
-		String searchName = request.getParameter("searchName");
-		String searchValue = request.getParameter("searchValue");
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("searchName", searchName);
-		map.put("searchValue", searchValue);
+		// 입력값 얻기
+		String title = request.getParameter("title");
+		String author = request.getParameter("author");
+		String content = request.getParameter("content");
 		
+		// DTO 에 저장
+		BoardDTO dto = new BoardDTO();
+		dto.setTitle(title);
+		dto.setAuthor(author);
+		dto.setContent(content);
 		
+		// Service 연동
 		BoardService service = new BoardServiceImpl();
-		List<BoardDTO> list = service.list(map);
+		int n = service.write(dto);
 		
-		// 목록보기는 request scope에 저장하는 것이 최적
-		request.setAttribute("boardList", list);
 		// 요청 위임
-		request.getRequestDispatcher("list.jsp").forward(request, response);
+		response.sendRedirect("list");
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		doGet(request, response);
+		
 	}
 
 }
