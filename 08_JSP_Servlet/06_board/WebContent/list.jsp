@@ -1,3 +1,4 @@
+<%@page import="com.dto.PageDTO"%>
 <%@page import="com.dto.BoardDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -21,7 +22,8 @@
 <body>
 	<h2>게시판 목록 보기</h2>
 	<%
-	List<BoardDTO> list = (List<BoardDTO>)request.getAttribute("boardList");
+	PageDTO pageDTO = (PageDTO)request.getAttribute("pageDTO");
+	List<BoardDTO> list = pageDTO.getList();
 	%>
 	<table border='1'>
 		<tr> <!-- 검색하기 -->
@@ -63,9 +65,36 @@
 		<%
 		}
 		%>
+		<!-- 페이지 번호 출력 -->
+		<%
+		int perPage = pageDTO.getPerPage();
+		int curPage = pageDTO.getCurPage();
+		int totalCount = pageDTO.getTotalCount();
+		int totalNum = totalCount / perPage;
+		if (totalCount%perPage != 0) totalNum++;
+		%>
+		<tr>
+			<td colspan="6">
+				<%
+				for (int i=1; i<=totalNum; i++){
+					if (curPage == i) {
+				%>
+					<%= i %>
+					<% 
+					} else {
+					%>
+					<a href="list?curPage=<%= i %>"><%= i %></a>
+					<% 
+					}
+					%>
+				<% 
+				}
+				%>	
+			</td>
+		</tr>
 	</table>
 	<hr>
-	<a href="writeui">작성하기</a>&nbsp;&nbsp;<a href="list">전체 목록</a>
+	<a href="writeui">작성하기</a>&nbsp;&nbsp;<a href="list">처음으로</a>
 
 </body>
 </html>
