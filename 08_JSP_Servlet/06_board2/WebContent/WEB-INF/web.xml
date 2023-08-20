@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+	<filter>
+        <filter-name>EncodingFilter</filter-name>
+        <filter-class>com.filter.EncodingFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>EncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    
+    <servlet>
+        <servlet-name>BoardListServlet</servlet-name>
+        <servlet-class>com.controller.BoardListServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BoardWriteUIServlet</servlet-name>
+        <servlet-class>com.controller.BoardWriteUIServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BoardWriteServlet</servlet-name>
+        <servlet-class>com.controller.BoardWriteServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BoardRetrieveServlet</servlet-name>
+        <servlet-class>com.controller.BoardRetrieveServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BoardUpdateServlet</servlet-name>
+        <servlet-class>com.controller.BoardUpdateServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>BoardDeleteServlet</servlet-name>
+        <servlet-class>com.controller.BoardDeleteServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>BoardListServlet</servlet-name>
+        <url-pattern>/list</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BoardWriteUIServlet</servlet-name>
+        <url-pattern>/writeui</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BoardWriteServlet</servlet-name>
+        <url-pattern>/write</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BoardRetrieveServlet</servlet-name>
+        <url-pattern>/retrieve</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BoardUpdateServlet</servlet-name>
+        <url-pattern>/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BoardDeleteServlet</servlet-name>
+        <url-pattern>/delete</url-pattern>
+    </servlet-mapping>
+</web-app>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BoardMapper">
+
+	<!-- 목록보기, 검색하기 -->
+	<select id="list" resultType="BoardDTO" parameterType="hashmap">
+		select num, title, author, writeday, readcnt
+		from board
+		<if test="searchName=='title' and searchValue!=null">
+			where title like '%'||#{searchValue}||'%'
+		</if>
+		<if test="searchName=='author' and searchValue!=null">
+			where author like '%'||#{searchValue}||'%'
+		</if>
+		order by 1 desc
+	</select>
+	
+	<!-- 작성하기 -->
+	<insert id="write" parameterType="BoardDTO">
+		insert into board (num, title, author, content)
+		values (board_seq.nextval, #{title}, #{author}, #{content})
+	</insert>
+	
+	<!-- 조회하기 -->
+	<select id="retrieve" resultType="BoardDTO" parameterType="int">
+		select num, title, author, content, writeday, readcnt
+		from board
+		where num=#{num}
+	</select>
+	
+	<!-- 조회수 증가 -->
+	<update id="readcnt" parameterType="int">
+		update board
+		set readcnt=readcnt+1
+		where num=#{num}
+	</update>
+	
+	<!-- 수정하기 -->
+	<update id="update" parameterType="BoardDTO">
+		update board
+		set title=#{title}, content=#{content}
+		where num=#{num}
+	</update>
+	
+	<!-- 삭제하기 -->
+	<delete id="delete" parameterType="int">
+		delete from board
+		where num=#{num}
+	</delete>
+	
+	<!-- 레코드 개수 (검색O) -->
+	<select id="totalRowSearch" resultType="int">
+		select count(*)
+		from board
+		<if test="searchName=='title' and searchValue!=null">
+			where title like '%'||#{searchValue}||'%'
+		</if>
+		<if test="searchName=='author' and searchValue!=null">
+			where author like '%'||#{searchValue}||'%'
+		</if>
+	</select>
+	
+	<!-- 레코드 개수 (검색X) -->
+	<select id="totalRow" resultType="int">
+		select count(*)
+		from board
+	</select>
+
+</mapper>
