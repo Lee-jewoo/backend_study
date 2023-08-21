@@ -22,11 +22,14 @@ public class BoardDAO {
 		pageDTO.setCurPage(curPage);
 		int totalCount = 0;
 		if (map.get("searchValue")==null) {
-			totalCount = session.selectOne("totalCount");
+			totalCount = session.selectOne("BoardMapper.totalCount");
 		} else {
-			totalCount = session.selectOne("totalCountSearch");
+			totalCount = session.selectOne("BoardMapper.totalCountSearch", map);
 		}
 		pageDTO.setTotalCount(totalCount);
+		
+		pageDTO.setSearchName(map.get("searchName"));
+		pageDTO.setSearchValue(map.get("searchValue"));
 		
 		// PageDTO에 검색 데이터 저장
 		return pageDTO;
