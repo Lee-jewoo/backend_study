@@ -3,6 +3,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,10 +22,8 @@
 </head>
 <body>
 	<h2>게시판 목록 보기</h2>
-	<%
-	PageDTO pageDTO = (PageDTO)request.getAttribute("pageDTO");
-	List<BoardDTO> list = pageDTO.getList();
-	%>
+	<c:set var="pageDTO" value="${pageDTO}"/>
+	<c:set var="list" value="${pageDTO.list}"/>
 	<table border='1'>
 		<tr> <!-- 검색하기 -->
 			<td colspan="6">
@@ -46,52 +45,37 @@
 			<th>조회수</th>
 			<th>삭제</th>
 		</tr>
-		<%
-		for (BoardDTO dto : list) {
-			int n = dto.getNum();
-			String title = dto.getTitle();
-			String author = dto.getAuthor();
-			String writeday = dto.getWriteday();
-			int readcnt = dto.getReadcnt();
-		%>
-		<tr>
-			<td><%= n %></td>
-			<td><a href="retrieve?num=<%= n %>"><%= title %></a></td>
-			<td><%= author %></td>
-			<td><%= writeday %></td>
-			<td><%= readcnt %></td>
-			<td><button data-num="<%= n %>">삭제</button></td>
-		</tr>
-		<%
-		}
-		%>
+		<c:forEach var="dto" items="${list}">
+			<tr>
+				<td>${dto.num}</td>
+				<td><a href="<c:url value='/retrieve?num=${dto.num}'/>">${dto.title}</a></td>
+				<td>${dto.author}</td>
+				<td>${dto.writeday}</td>
+				<td>${dto.readcnt}</td>
+				<td><button data-num="${dto.num}">삭제</button></td>
+			</tr>
+		</c:forEach>
+
 		<!-- 페이지 번호 출력 -->
-		<%
-		int perPage = pageDTO.getPerPage();
-		int curPage = pageDTO.getCurPage();
-		int totalCount = pageDTO.getTotalCount();
-		int totalNum = totalCount / perPage;
-		if (totalCount%perPage != 0) totalNum++;
-		String searchName = pageDTO.getSearchName();
-		String searchValue = pageDTO.getSearchValue();
-		%>
+		<c:set var="perPage" value="${pageDTO.perPage}"/>
+		<c:set var="curPage" value="${pageDTO.curPage}"/>
+		<c:set var="totalCount" value="${pageDTO.totalCount}"/>
+		<c:set var="searchName" value="${pageDTO.searchName}"/>
+		<c:set var="searchValue" value="${pageDTO.searchValue}"/>
+		<c:set var="totalNum" value="${totalCount/perPage}"/>
+		<c:if test="${totalCount%perPage!=0}">
+			<c:set var="totalNum" value="${totalNum+1}"/>
+		</c:if>
 		<tr>
 			<td colspan="6">
-				<%
-				for (int i=1; i<=totalNum; i++){
-					if (curPage == i) {
-				%>
-					<%= i %>
-					<% 
-					} else {
-					%>
-					<a href="list?curPage=<%= i %>&searchName=<%= searchName %>&searchValue=<%= searchValue %>"><%= i %></a>
-					<% 
-					}
-					%>
-				<% 
-				}
-				%>	
+				<c:forEach var="i" begin="1" end="${totalNum}">
+					<c:if test="${curPage == i}">
+						${i}
+					</c:if>
+					<c:if test="${curPage!=i}">
+						<a href="list?curPage=${i}&searchName=${searchName}&searchValue=${searchValue}">${i}</a>
+					</c:if>
+				</c:forEach>
 			</td>
 		</tr>
 	</table>
