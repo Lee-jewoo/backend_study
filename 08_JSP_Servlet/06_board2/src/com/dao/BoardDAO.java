@@ -23,9 +23,12 @@ public class BoardDAO {
 		if (map.get("searchValue") == null) {
 			totalRow = session.selectOne("BoardMapper.totalRow");
 		} else {
-			totalRow = session.selectOne("BoardMapper.totalRowSearch");
+			totalRow = session.selectOne("BoardMapper.totalRowSearch", map);
 		}
 		pageDTO.setTotalRow(totalRow);
+		
+		pageDTO.setSearchName(map.get("searchName"));
+		pageDTO.setSearchValue(map.get("searchValue"));
 		return pageDTO;
 	}
 	
