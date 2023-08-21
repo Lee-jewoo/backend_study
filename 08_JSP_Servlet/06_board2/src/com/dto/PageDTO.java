@@ -8,6 +8,8 @@ public class PageDTO {
 	int perPage = 3; // 한 페이지의 레코드 개수
 	int curPage; // 현재 페이지
 	int totalRow; // 전체 레코드 개수
+	String searchName;
+	String searchValue;
 	
 	public PageDTO() {}
 	public PageDTO(List<BoardDTO> list, int perPage, int curPage, int totalRow) {
@@ -17,6 +19,18 @@ public class PageDTO {
 		this.totalRow = totalRow;
 	}
 	
+	public String getSearchName() {
+		return searchName;
+	}
+	public void setSearchName(String searchName) {
+		this.searchName = searchName;
+	}
+	public String getSearchValue() {
+		return searchValue;
+	}
+	public void setSearchValue(String searchValue) {
+		this.searchValue = searchValue;
+	}
 	public List<BoardDTO> getList() {
 		return list;
 	}
