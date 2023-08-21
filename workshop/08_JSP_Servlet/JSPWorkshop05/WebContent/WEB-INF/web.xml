@@ -28,6 +28,14 @@
         <servlet-name>EmpRetrieveServlet</servlet-name>
         <servlet-class>com.controller.EmpRetrieveServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>EmpUpdateServlet</servlet-name>
+        <servlet-class>com.controller.EmpUpdateServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EmpDeleteServlet</servlet-name>
+        <servlet-class>com.controller.EmpDeleteServlet</servlet-class>
+    </servlet>
     
     <servlet-mapping>
         <servlet-name>EmpListServlet</servlet-name>
@@ -44,6 +52,14 @@
     <servlet-mapping>
         <servlet-name>EmpRetrieveServlet</servlet-name>
         <url-pattern>/retrieve</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmpUpdateServlet</servlet-name>
+        <url-pattern>/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EmpDeleteServlet</servlet-name>
+        <url-pattern>/delete</url-pattern>
     </servlet-mapping>
 
 </web-app>

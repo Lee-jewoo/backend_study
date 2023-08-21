@@ -50,4 +50,32 @@ public class EmpServiceImpl implements EmpService {
 		return dto;
 	}
 
+	@Override
+	public int update(EmpDTO dto) {
+		SqlSession session = MySqlSessionFactory.getSession();
+		int n = 0;
+		try {
+			EmpDAO dao = new EmpDAO();
+			n = dao.update(session, dto);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
+	@Override
+	public int delete(int num) {
+		SqlSession session = MySqlSessionFactory.getSession();
+		int n = 0;
+		try {
+			EmpDAO dao = new EmpDAO();
+			n = dao.delete(session, num);
+			session.commit();
+		} finally {
+			session.close();
+		}
+		return n;
+	}
+
 }

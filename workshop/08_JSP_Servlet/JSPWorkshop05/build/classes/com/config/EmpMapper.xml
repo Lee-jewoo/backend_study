@@ -19,4 +19,15 @@
 		from emp
 		where empno=#{empno}
 	</select>
+	
+	<update id="update" parameterType="EmpDTO">
+		update emp
+		set job=#{job}, sal=#{sal}
+		where empno=#{empno}
+	</update>
+	
+	<delete id="delete" parameterType="int">
+		delete from emp
+		where empno=#{empno}
+	</delete>
 </mapper>

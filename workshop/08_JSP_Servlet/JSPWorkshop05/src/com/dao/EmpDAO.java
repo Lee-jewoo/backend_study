@@ -22,5 +22,15 @@ public class EmpDAO {
 		EmpDTO dto = session.selectOne("EmpMapper.retrieve", num);
 		return dto;
 	}
+	
+	public int update (SqlSession session, EmpDTO dto) {
+		int n = session.update("EmpMapper.update", dto);
+		return n;
+	}
+	
+	public int delete (SqlSession session, int num) {
+		int n = session.delete("EmpMapper.delete", num);
+		return n;
+	}
 
 }

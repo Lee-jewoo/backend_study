@@ -11,5 +11,9 @@ public interface EmpService {
 	public int insert (EmpDTO dto);
 	
 	public EmpDTO retrieve (int num);
+	
+	public int update (EmpDTO dto);
+	
+	public int delete (int num);
 
 }
