@@ -72,6 +72,8 @@
 		int totalCount = pageDTO.getTotalCount();
 		int totalNum = totalCount / perPage;
 		if (totalCount%perPage != 0) totalNum++;
+		String searchName = pageDTO.getSearchName();
+		String searchValue = pageDTO.getSearchValue();
 		%>
 		<tr>
 			<td colspan="6">
@@ -83,7 +85,7 @@
 					<% 
 					} else {
 					%>
-					<a href="list?curPage=<%= i %>"><%= i %></a>
+					<a href="list?curPage=<%= i %>&searchName=<%= searchName %>&searchValue=<%= searchValue %>"><%= i %></a>
 					<% 
 					}
 					%>
