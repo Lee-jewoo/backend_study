@@ -19,11 +19,17 @@
 			}
 		});
 		
-		// 상품 옵션 유효성 체크
-		
-		
 		// 장바구니 버튼 이벤트
 		$("#cartBtn").on("click", function(){
+			// 상품 옵션 유효성 체크
+			if ($("#gSize").val()=="사이즈선택") {
+				event.preventDefault();
+				alert("사이즈를 선택하세요.")
+			}
+			if ($("#gColor").val()=="색상선택") {
+				event.preventDefault();
+				alert("색상을 선택하세요.")
+			}
 			var form = $("#myForm")[0];
 			form.action="CartAddServlet";
 			form.method="get"
