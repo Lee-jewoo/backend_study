@@ -7,7 +7,7 @@
 <title>ShopMiniMall</title>
 </head>
 <body>
-	<h1>상품 상세 화면입니다.</h1>
+	<h1>장바구니 화면입니다.</h1>
 	<jsp:include page="common/top.jsp" flush="true"/><br>
 	<jsp:include page="common/menu.jsp" flush="true"/>
 	<hr>
