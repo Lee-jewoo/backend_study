@@ -1,5 +1,6 @@
 package com.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -8,8 +9,8 @@ import com.dto.EmpDTO;
 
 public class EmpDAO {
 	
-	public List<EmpDTO> list (SqlSession session) {
-		List<EmpDTO> list = session.selectList("EmpMapper.list");
+	public List<EmpDTO> list (SqlSession session, HashMap<String, String> map) {
+		List<EmpDTO> list = session.selectList("EmpMapper.list", map);
 		return list;
 	}
 	

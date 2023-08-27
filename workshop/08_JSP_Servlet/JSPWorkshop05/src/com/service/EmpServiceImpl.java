@@ -1,5 +1,6 @@
 package com.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -11,12 +12,12 @@ import com.dto.EmpDTO;
 public class EmpServiceImpl implements EmpService {
 
 	@Override
-	public List<EmpDTO> list() {
+	public List<EmpDTO> list(HashMap<String, String> map) {
 		SqlSession session = MySqlSessionFactory.getSession();
 		List<EmpDTO> list = null;
 		try {
 			EmpDAO dao = new EmpDAO();
-			list = dao.list(session);
+			list = dao.list(session, map);
 		} finally {
 			session.close();
 		}

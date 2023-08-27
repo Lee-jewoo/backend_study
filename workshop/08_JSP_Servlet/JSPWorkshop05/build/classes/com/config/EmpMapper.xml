@@ -3,10 +3,21 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="EmpMapper">
-	<select id="list" resultType="EmpDTO">
+	<select id="list" resultType="EmpDTO" parameterType="hashmap">
 		select empno, ename, job, mgr, to_char(hiredate, 'YYYY/MM/DD') as hiredate, sal, comm, deptno
 		from emp
-		order by 1
+		<if test="searchName=='ename' and searchValue!=null">
+			where ename like upper('%'||#{searchValue}||'%')
+		</if>
+		<if test="searchName=='hiredate' and searchValue!=null">
+			where to_char(hiredate, 'YYYY')=#{searchValue}
+		</if>
+		<if test="align=='salDesc' or align==null">
+			order by sal desc
+		</if>
+		<if test="align=='salAsc'">
+			order by sal asc
+		</if>
 	</select>
 	
 	<insert id="insert" parameterType="EmpDTO">
