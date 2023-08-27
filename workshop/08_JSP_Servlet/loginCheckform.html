@@ -5,30 +5,31 @@
 <title>Insert title here</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
     <script> // 문제10
-    $("document").ready(function(){
-    	$("button").on("click", function(){
-    		event.preventDefault();
+    $(document).ready(function(){
+    	$("#idCheck").on("click", function(){
+			event.preventDefault();
     		$.ajax({
-	    		url:"loginCheckServlet",
 	   			type:"post",
-	   			dataType:"text",
+	    		url:"logincheck",
 	   			data:{
-   				userid:$("#userid").val()
+   					id:$("#id").val()
    				},
+	   			dataType:'text',
 	   			success:function(data,status,xhr){
 		 			$("#result").text(data);
 		        },
 		        error:function(xhr,status,e){
+		        	alert("다시 시도해주세요.");
 		        }
-    		}
-    	}
-    }
+    		});
+    	});
+    });
     </script>
 </head>
 <body> <!-- 문제10 -->
 <form action="logincheck" method="post">
-	아이디 <input type="text" name="id" id="userid">
-	<button>중복조회</button>
+	아이디 <input type="text" name="id" id="id">
+	<button id="idCheck">중복조회</button>
 	<span id="result"></span><br>
 	비밀번호 <input type="password" name="passwd" id="passwd"><br>
 	<input type="submit" name="login" value="로그인">
