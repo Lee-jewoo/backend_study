@@ -19,16 +19,16 @@ public class LoginCheckServlet extends HttpServlet {
 	// 문제10
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
+		String id = request.getParameter("id");
+		String mesg = "사용 가능";
+		if (id.equals("test")) {
+			mesg = "사용 불가";
+		}
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/plain;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		String id = request.getParameter("id");
-		if (id.equals("test")) {
-			out.print("사용 불가");
-		} else {
-			out.print("사용 가능");
-		}
-	
+		out.print(mesg);
+		
 	}
 
 }
