@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:c="http://www.springframework.org/schema/c"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- namespace 생성자 사용 -->
+<bean id="dao" class="com.dao.UserDAO"/>
+<bean id="service" class="com.service.UserService" c:num="10" c:name="춘식이" c:dao-ref="dao"/>
+
+</beans>

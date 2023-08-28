@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- setter 메서드를 이용한 의존성 주입 -->
+	<bean id="service" class="com.service.UserService">
+		<property name="num" value="10"/>
+		<property name="name" value="춘식이"/>
+		<property name="dao" ref="dao"/>
+	</bean>
+	
+	<!-- UserDAO 객체 생성 -->
+	<bean id="dao" class="com.dao.UserDAO"/>
+
+	<!-- 태그로 작성할 수 있음 -->
+	<!-- <bean id="service" class="com.service.UserService">
+		<property name="num">
+			<value>10</value>
+		</property>
+		<property name="name">
+			<value>춘식이</value>
+		</property>
+		<property name="dao">
+			<ref bean="dao"/>
+		</property>
+	</bean> -->
+	
+</beans>

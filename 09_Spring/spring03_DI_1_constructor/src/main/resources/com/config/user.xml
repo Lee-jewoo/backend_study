@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- 기본 생성자 -->
+<bean id="xxx" class="com.service.UserService"/>
+
+<!-- 인자가 있는 생성자 -->
+<bean id="yyy" class="com.service.UserService">
+	<constructor-arg type="int" value="10"/>
+</bean>
+
+<!-- 인자가 여러 개 있는 생성자 -->
+<bean id="zzz" class="com.service.UserService">
+	<constructor-arg name="num" index="0" value="10"/>
+	<constructor-arg name="name" index="1" value="춘식이"/>
+</bean>
+
+<!-- 참조형 데이터 주입 -->
+<bean id="dao" class="com.dao.UserDAO"/>
+<bean id="service" class="com.service.UserService">
+	<constructor-arg name="dao" ref="dao"/>
+</bean>
+
+<!-- 기본형 + 참조형 주입 -->
+<bean id="dao" class="com.dao.UserDAO"/>
+<bean id="service" class="com.service.UserService">
+	<constructor-arg name="dao" ref="dao"/>
+	<constructor-arg name="num" value="10"/>
+</bean>
+
+<!-- 태그로 지정 -->
+<bean id="dao" class="com.dao.UserDAO"/>
+<bean id="service" class="com.service.UserService">
+	<constructor-arg name="dao">
+		<ref bean="dao"/>
+	</constructor-arg>
+	<constructor-arg name="num">
+		<value>10</value>
+	</constructor-arg>
+</bean>
+
+</beans>
