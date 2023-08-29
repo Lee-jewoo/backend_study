@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- jdbc.properties 등록 -->
+	
+	<!-- deprecated된 방법
+	<bean id="jdbc" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:com/config/jdbc.properties"></property>
+	</bean> -->
+	
+	<!-- context namespace를 이용한 방법으로 사용 -->
+	<context:property-placeholder location="classpath:com/config/jdbc.properties"/>
+	
+	<bean id="service" class="com.service.UserService">
+		<property name="driver" value="${jdbc.driver}"></property>
+		<property name="url" value="${jdbc.url}"></property>
+		<property name="userid" value="${jdbc.username}"></property>
+		<property name="passwd" value="${jdbc.password}"></property>
+	</bean>
+	
+</beans>
