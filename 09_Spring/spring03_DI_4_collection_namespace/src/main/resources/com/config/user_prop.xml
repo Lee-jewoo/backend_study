@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+	
+	<util:properties id="prop">
+		<prop key="phone1">01012341234</prop>
+		<prop key="phone2">01043214321</prop>
+	</util:properties>
+	
+	<bean id="service" class="com.service.UserService_prop">
+		<property name="phones" ref="prop"/>
+	</bean>
+
+</beans>
