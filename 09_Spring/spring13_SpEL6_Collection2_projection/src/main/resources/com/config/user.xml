@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.3.xsd">
+	
+	<util:list id="catList">
+		<bean id="cat1" class="com.dto.Cat" p:name="나비" p:age="10" p:married="true" p:height="50.3"/>
+		<bean id="cat2" class="com.dto.Cat" p:name="코코" p:age="5" p:married="false" p:height="30.7"/>
+		<bean id="cat3" class="com.dto.Cat" p:name="미미" p:age="3" p:married="false" p:height="40.1"/>
+		<bean id="cat4" class="com.dto.Cat" p:name="모모" p:age="12" p:married="true" p:height="70.5"/>
+	</util:list>
+	
+	<!-- 전체 목록 얻기 -->
+	<bean id="person1" class="com.dto.Person">
+		<property name="catList" value="#{catList}"></property>
+	</bean>
+
+	<!-- 이름만 얻기 -->
+	<bean id="person2" class="com.dto.Person">
+		<property name="catNameList" value="#{catList.![name]}"></property>
+	</bean>
+	
+	<!-- 조건에 해당하는 이름만 얻기 -->
+	<bean id="person3" class="com.dto.Person">
+		<property name="catNameList" value="#{catList.?[age le 10].![name]}"></property>
+	</bean>
+	
+</beans>
