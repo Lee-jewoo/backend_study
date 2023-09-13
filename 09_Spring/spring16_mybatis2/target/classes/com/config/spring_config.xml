@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+
+	<!-- jdbc.properties 등록 -->
+	<context:property-placeholder location="classpath:com/config/jdbc.properties"/>
+	
+	<!-- DBCP 등록 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="${jdbc.driver}"></property>
+		<property name="url" value="${jdbc.url}"></property>
+		<property name="username" value="${jdbc.username}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+	</bean>
+	
+	<!-- SqlSessionFactoryBean 등록 -->
+	<bean id="sessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/>
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:com/config/DeptMapper.xml</value>
+			</list>
+		</property>
+		<property name="typeAliases">
+			<list>
+				<value>com.dto.DeptDTO</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- SqlSessionTemplate 등록 -->
+	<bean id="sessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg name="sqlSessionFactory" ref="sessionFactory"></constructor-arg>
+	</bean>
+	
+	<!-- DAO, Service 등록 -->
+	<context:component-scan base-package="com.*"/>	
+
+</beans>
