@@ -1,6 +1,7 @@
 package com.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,11 +21,11 @@ public class DeptController {
 	
 	// 전체 목록
 	@GetMapping("/findAll")
-	public String findAll(Model m) {
+	public String findAll(Model m, @RequestParam Map<String, String> map) {
 		// Model
-		List<DeptDTO> list = service.findAll();
+		List<DeptDTO> list = service.findAll(map);
 		m.addAttribute("list", list);
-		
+		m.addAttribute("map", map);
 		return "list"; // View
 	}
 	
@@ -45,6 +46,21 @@ public class DeptController {
 	@GetMapping("/delete")
 	public String deptDelete(@RequestParam("deptno") int deptno) {
 		int n = service.deptDelete(deptno);
+		return "redirect:findAll";
+	}
+	
+	// 부서 상세 보기
+	@GetMapping("/retrieve")
+	public String deptRetrieve(@RequestParam("deptno") int deptno, Model m) {
+		DeptDTO dto = service.deptRetrieve(deptno);
+		m.addAttribute("dto", dto);
+		return "retrieve";
+	}
+	
+	// 부서 수정
+	@PostMapping("/deptUpdate")
+	public String deptUpdate(DeptDTO dto) {
+		int n = service.deptUpdate(dto);
 		return "redirect:findAll";
 	}
 

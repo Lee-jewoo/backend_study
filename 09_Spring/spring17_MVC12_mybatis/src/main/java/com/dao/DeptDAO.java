@@ -1,6 +1,7 @@
 package com.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,9 +15,9 @@ public class DeptDAO {
 	@Autowired
 	SqlSessionTemplate session;
 	
-	// 전체 목록
-	public List<DeptDTO> findAll(){
-		return session.selectList("DeptMapper.findAll");
+	// 전체 목록 + 검색
+	public List<DeptDTO> findAll(Map<String, String> map){
+		return session.selectList("DeptMapper.findAll", map);
 	}
 	
 	// 부서 등록
@@ -28,5 +29,15 @@ public class DeptDAO {
 	public int deptDelete(int deptno) {
 		return session.delete("DeptMapper.deptDelete", deptno);
 	}
-
+	
+	// 상세 보기
+	public DeptDTO deptRetrieve (int deptno) {
+		return session.selectOne("DeptMapper.deptRetrieve", deptno);
+	}
+	
+	// 부서 수정
+	public int deptUpdate (DeptDTO dto) {
+		return session.update("DeptMapper.deptUpdate", dto);
+	}
+	
 }

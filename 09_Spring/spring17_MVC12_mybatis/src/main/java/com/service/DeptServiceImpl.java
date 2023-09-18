@@ -1,6 +1,7 @@
 package com.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,8 +17,8 @@ public class DeptServiceImpl implements DeptService {
 	
 	// 전체 목록
 	@Override
-	public List<DeptDTO> findAll() {
-		return dao.findAll();
+	public List<DeptDTO> findAll(Map<String, String> map) {
+		return dao.findAll(map);
 	}
 
 	// 부서 등록
@@ -30,6 +31,18 @@ public class DeptServiceImpl implements DeptService {
 	@Override
 	public int deptDelete(int deptno) {
 		return dao.deptDelete(deptno);
+	}
+
+	// 부서 상세 보기
+	@Override
+	public DeptDTO deptRetrieve(int deptno) {
+		return dao.deptRetrieve(deptno);
+	}
+	
+	// 부서 수정
+	@Override
+	public int deptUpdate(DeptDTO dto) {
+		return dao.deptUpdate(dto);
 	}
 
 }

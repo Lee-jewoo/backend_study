@@ -4,9 +4,18 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="DeptMapper">
 
-	<select id="findAll" resultType="DeptDTO">
+	<select id="findAll" resultType="DeptDTO" parameterType="hashmap">
 		select deptno, dname, loc
 		from dept
+		<if test="searchName=='deptno' and searchValue!=null">
+			where deptno=#{searchValue}
+		</if>
+		<if test="searchName=='dname' and searchValue!=null">
+			where dname like '%'||#{searchValue}||'%'
+		</if>
+		<if test="searchName=='loc' and searchValue!=null">
+			where loc like '%'||#{searchValue}||'%'
+		</if>
 		order by deptno
 	</select>
 	
@@ -25,5 +34,11 @@
 		delete from dept
 		where deptno=#{deptno}
 	</delete>
+	
+	<select id="deptRetrieve" resultType="DeptDTO" parameterType="int">
+		select deptno, dname, loc
+		from dept
+		where deptno=#{deptno}
+	</select>
 	
 </mapper>
