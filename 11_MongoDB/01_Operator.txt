@@ -1,0 +1,71 @@
+- 기본 명령어
+    - 현재 DB 확인 : db
+    DB 정보 확인 : show dbs
+    현재 DB의 컬렉션 확인 : show collections
+    DB 선택 / DB가 없으면 생성 : use DB이름
+    화면 클리어 : cls
+- 조회 (query : 행 선택)
+    - 전체 목록 조회 : db.컬렉션명.find() / db.컬렉션명.find({})
+        
+        ```html
+        db.user.find()
+        db.user.find({})
+        ```
+        
+    - 조건 지정 조회 : db.컬렉션명.find({key:value}) / db.컬렉션명.find({key:{$eq:value}})
+        
+        ```html
+        db.user.find({age:18})
+        db.user.find({_id:2})
+        db.user.find({gender:'m'})
+        ```
+        
+    - and 조건 지정 : db.컬렉션명.find({key:value, key:value}) / db.컬렉션명.find({$and:[{key:value}, {key:value}]})
+        
+        ```html
+        db.user.find({gender:'f', age:18})
+        db.user.find({$and:[{age:18}, {gender:'f'}]})
+        ```
+        
+    - or 조건 지정 : db.컬렉션명.find({$or:[{key:value}, {key:value}]})
+        
+        ```html
+        db.user.find({$or:[{age:18}, {gender:'m'}]})
+        ```
+        
+    - nor 조건 지정 : 조건이 모두 false / db.컬렉션명.find({$nor:[{key:value}, {key:value}]})
+        
+        ```html
+        db.user.find({$nor:[{age:18}, {gender:'m'}]})
+        ```
+        
+    - not 조건 지정 : db.컬렉션명.find({key:{$not:{$eq:value}}})
+        
+        ```html
+        db.user.find({age:{$not:{$eq:67}}})
+        ```
+        
+    - 비교연산
+        - db.컬렉션명.find({key:{$연산자:값}})
+        - $eq : 같음
+        - $gt : 보다 큼 / $gte : 보다 크거나 같음
+        - $lt : 보다 작음 / $lte : 보다 작거나 같음
+        - $in : 포함
+        
+        ```html
+        db.user.find({age:{$gt:50}})
+        db.user.find({age:{$gt:40, $lt:60}})
+        db.user.find({age:{$gt:40, $lt:60}, username:'홍길동'})
+        db.user.find({age:{$in:[34, 67]}})
+        ```
+        
+- 조회 (projection : 열 선택)
+    - 컬럼 선택 = 1 / 제거 = 0을 명시
+    - db.컬렉션명.find({행선택}, {열선택}) -> 열선택 key:1|0
+    
+    ```html
+    db.user.find({}, {username:1})
+    db.user.find({}, {username:1, gender:1})
+    db.user.find({}, {username:0})
+    db.user.find({age:{$gt:60}}, {username:1})
+    ```
