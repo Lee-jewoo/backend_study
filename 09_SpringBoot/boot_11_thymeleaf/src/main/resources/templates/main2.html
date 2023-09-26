@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<h1>main2.html</h1>
+	<p th:text="'라이언'"></p>
+	request : <span th:text="${username}"></span><br>
+	session : <span th:text="${session.username}"></span><br>
+	application : <span th:text="${application.username}"></span><br>
+</body>
+</html>
