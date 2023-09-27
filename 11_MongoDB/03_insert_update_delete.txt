@@ -1,0 +1,50 @@
+- 저장할 때 해당 컬렉션이 없으면 자동으로 생성
+- 단일 문서 저장 : insertOne(문서)
+    - db.컬렉션명.insertOne(문서)
+    
+    ```html
+    db.inventory.insertOne(
+    { item: "canvas", qty: 100, tags: ["cotton"], size: { h: 28, w: 35.5, uom: "cm" } }
+    )
+    ```
+    
+- 다중 문서 저장 : insertMany([문서1, 문서2...])
+    - db.컬렉션명.insertMany([문서1, 문서2...])
+    
+    ```html
+    db.inventory.insertMany([
+    { item: "journal", qty: 25, tags: ["blank", "red"], size: { h: 14, w: 21, uom: "cm" } },
+    { item: "mat", qty: 85, tags: ["gray"], size: { h: 27.9, w: 35.5, uom: "cm" } },
+    { item: "mousepad", qty: 25, tags: ["gel", "blue"], size: { h: 19, w: 22.85, uom: "cm" } }
+    ])
+    ```
+    
+- 단일 문서 수정 : updateOne(필터, $set 표현식)
+    - db.컬렉션명.updateOne(필터, $set 표현식)
+    
+    ```html
+    db.inventory.updateOne({item:'paper'}, {$set:{qty:200, "size.uom":"cm"}})
+    db.inventory.updateOne({item:'paper'}, {$inc:{qty:-50}})
+    db.inventory.updateOne({item:'paper'}, {$set:{status:'F'}, $inc:{qty:50}})
+    ```
+    
+- 다중 문서 수정 : updateMany((필터, $set 표현식)
+    - db.컬렉션명.updateMany(필터, $set 표현식)
+    
+    ```html
+    db.inventory.updateMany({qty:{$lt:50}}, {$set:{status:'F'}})
+    ```
+    
+- 단일 문서 삭제 : deleteOne(필터)
+    - db.컬렉션명.deleteOne(필터)
+    
+    ```html
+    db.inventory.deleteOne({item:’paper’})
+    ```
+    
+- 다중 문서 삭제 : deleteMany(필터)
+    - db.컬렉션명.deleteMany(필터)
+    
+    ```html
+    db.inventory.deleteMany({qty:{$lt:50}})
+    ```
