@@ -1,0 +1,72 @@
+- 그룹핑 기능 / 컬럼에 별칭 지정 / 필터링 기능 및 정렬
+- db.컬렉션명.aggregate([{<$stage1>},{<$stage2>}...])
+- $stage 표현식
+    - $project : 프로젝션 / 별칭 지정
+    
+    ```html
+    db.user.aggregate({$project:{username:1, age:1}})
+    db.user.aggregate({$project:{username:1, userage:"$age", _id:0, num:"$_id"}})
+    ```
+    
+- $match : 필터링
+    
+    ```html
+    db.user.aggregate({$project:{username:1, age:1}}, {$match:{age:{$gt:30}}})
+    db.user.aggregate({$project:{username:1, age:1, gender:1}},
+    {$match:{$or:[{age:{$gt:30}}, {gender:'m'}]}})
+    ```
+    
+- $sort : 정렬
+    
+    ```html
+    db.user.aggregate({$project:{username:1, age:1}}, {$sort:{age:1}})
+    db.user.aggregate({$project:{username:1, age:1, gender:1}},
+    {$match:{$or:[{age:{$gt:30}}, {gender:'m'}]}}, {$sort:{age:1}})
+    ```
+    
+- $group : 그룹핑
+    - pk기능으로 _id를 지정해야 함 → $key
+    - 그룹 표현식을 사용할 수 있음
+    - {$group:{“_id”:“$컬럼명”}}
+    
+    ```html
+    db.user.aggregate({$group:{"_id":"$gender"}})
+    ```
+    
+- 그룹표현식
+    - $sum : 합계 → {“별칭”:{$sum:“$key”}}
+        
+        ```html
+        db.user.aggregate({$group:{"_id":"$gender", "sum":{$sum:"$age"}}})
+        ```
+        
+    - $avg : 평균 → {“별칭”:{$avg:“$key”}}
+        
+        ```html
+        db.user.aggregate({$group:{"_id":"$gender", "avg":{$avg:"$age"}}})
+        ```
+        
+    - $max : 최대 → {“별칭”:{$max:“$key”}}
+        
+        ```html
+        db.user.aggregate({$group:{"_id":"$gender", "max":{$max:"$age"}}})
+        ```
+        
+    - $min : 최소 → {“별칭”:{$min:“$key”}}
+        
+        ```html
+        db.user.aggregate({$group:{"_id":"$gender", "min":{$min:"$age"}}})
+        ```
+        
+    - $sum:1 : 개수 (count) → {“별칭”:{$sum:1}}
+        
+        ```html
+        db.user.aggregate({$group:{"_id":"$gender", "cnt":{$sum:1}}})
+        db.user.aggregate({$group:{"_id":"$gender", "cnt":{$sum:1}, 
+        																						"sum":{$sum:"$age"}, 
+        																						"avg":{$avg:"$age"}, 
+        																						"max":{$max:"$age"}, 
+        																						"min":{$min:"$age"}}})
+        ```
+        
+- Java-MongoDB 연동
