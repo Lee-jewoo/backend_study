@@ -1,0 +1,87 @@
+- 값으로 조회
+    - key 배열에 value 값이 있는 데이터
+        - db.컬렉션명.find({key:value})
+        
+        ```html
+        db.user2.find({grade:'A'})
+        ```
+        
+    - key 배열에 value 값이 있는 데이터 개수
+        - db.컬렉션명.find({key:value}).count()
+        
+        ```html
+        db.user2.find({grade:'A'}).count()
+        ```
+        
+    - key 배열에 value 값 순서가 일치
+        - db.컬렉션명.find({key:[v, v2, v3]})
+        
+        ```html
+        db.user2.find({grade:['A', 'B', 'C']})
+        ```
+        
+    - 하나 이상의 배열 요소와 일치 / 순서나 개수와 무관
+        - db.컬렉션명.find({key:{$all:[v, v2]}})
+        
+        ```html
+        db.user2.find({grade:{$all:['A','B']}})
+        ```
+        
+- 지정된 index로 조회
+    - key 배열의 index 값이 value인 데이터
+        - db.컬렉션명.find({“key.index”:value})
+        
+        ```html
+        db.user2.find({"grade.1" : 'B'})
+        ```
+        
+- 배열의 크기로 조회
+    - key 배열의 크기가 n인 데이터
+        - db.컬렉션명.find({key:{$size:n}})
+        
+        ```html
+        db.user2.find({fruit:{$size:3}})
+        ```
+        
+    - Embedded document (중첩 JSON)
+        - 순서와 개수가 일치해야 하는 경우 {} 사용
+            - db.collection.find({key:{k1:v,k2:v}})
+            
+            ```html
+            db.user2.find({comments:{email:'sung@example.com',content:'graceful woman'}})
+            ```
+            
+        - 순서와 개수가 무관한 경우 . 사용
+            - db.collection.find({“key.k1”:v, “key.k2”:v}})
+            
+            ```html
+            db.user2.find({"comments.email":'sung@example.com',"comments.content": 'graceful woman'})
+            ```
+            
+- limit : 처음부터 n개
+    - db.컬렉션명.find().limit(n)
+    
+    ```html
+    db.user2.find().limit(3)
+    ```
+    
+- skip : 처음부터 n개를 스킵
+    - db.컬렉션명.find().skip(n)
+    
+    ```html
+    db.user2.find().skip(3)
+    ```
+    
+- sort : 정렬 (오름차순 1 / 내림차순-1)
+    - db.컬렉션명.find().sort({key:1|-1})
+    
+    ```html
+    db.user2.find().sort({age:1})
+    db.user2.find().sort({age:-1})
+    ```
+    
+- 나이순 정렬 후 2개 스킵, 3개 출력
+    
+    ```html
+    db.user2.find().skip(2).limit(3).sort({age:1})
+    ```
